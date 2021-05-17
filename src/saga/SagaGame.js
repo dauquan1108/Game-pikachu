@@ -1,6 +1,6 @@
 import * as types from "../constants/ActionTypes";
 
-import { put, take, call } from "redux-saga/effects";
+import { take } from "redux-saga/effects";
 
 export function* watcherGetDataMain() {
   while (true) {
