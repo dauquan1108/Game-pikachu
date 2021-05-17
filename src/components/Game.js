@@ -4,7 +4,7 @@ class Game extends Component {
   render() {
     return (
       <div>
-        <h1> Xuan Quan</h1>
+        <h1> Xuan Quan ddddd</h1>
       </div>
     );
   }
