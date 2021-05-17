@@ -4,9 +4,20 @@ import "./style.css";
 import { connect } from "react-redux";
 
 class Ingredient extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     status: false,
+  //   };
+  // }
+  // ItemButtons = () => {
+  //   this.setState({
+  //     status: !this.state.status,
+  //   });
+  // };
   render() {
     const { list } = this.props;
-    console.log({ list });
+    // const checkStatus = this.state.status ? "Item" : "Item_";
     return (
       <div className="Ingredient">
         {list.map((arr, index) => {
@@ -16,7 +27,19 @@ class Ingredient extends Component {
                 return (
                   <div key={indexItem}>
                     <div className="Item">
-                      <button className="ItemButton">{item}</button>
+                      <button
+                        className="ItemButton"
+                        // onClick={() =>
+                        //   this.ItemButtons(list, arr, index, item, indexItem)
+                        // }
+                      >
+                        {/* {item} */}
+                        <img
+                          className="ItemImg"
+                          src={item.img}
+                          alt="icon-pokemon"
+                        />
+                      </button>
                     </div>
                   </div>
                 );
