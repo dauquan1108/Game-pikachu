@@ -13,11 +13,12 @@ class App extends Component {
   };
   render() {
     const check = this.state.status ? " App" : " App_";
+    const status = this.state.status ? "Button-Color" : "Button-Color_";
     return (
       <div className={check}>
         <div className="Button">
-          <button className="Button-Color" onClick={this.buttonClick}>
-            Button
+          <button className={status} onClick={this.buttonClick}>
+            {this.state.status ? " light" : " dark"}
           </button>
         </div>
         <div className="Content">

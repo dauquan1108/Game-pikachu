@@ -3,21 +3,28 @@ import "./style.css";
 //React-Redux --- npm install react-redux
 import { connect } from "react-redux";
 
+import { ON_ITEM_BUTTON_CLICK } from "../actions/index";
+
 class Ingredient extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     status: false,
-  //   };
-  // }
-  // ItemButtons = () => {
-  //   this.setState({
-  //     status: !this.state.status,
-  //   });
-  // };
+  constructor(props) {
+    super(props);
+    this.state = {
+      clickButton: false,
+    };
+  }
+  ItemButtonOnClick = (list, arr, index, item, indexItem) => {
+    this.setState({
+      clickButton: !this.state.clickButton,
+    });
+    const { onItemButtonClick } = this.props;
+    onItemButtonClick(list, arr, index, item, indexItem);
+  };
   render() {
+    const clickButton = this.state.clickButton ? "ItemButton" : "ItemButton_";
     const { list } = this.props;
-    // const checkStatus = this.state.status ? "Item" : "Item_";
+    console.log({ list });
+    // const id = list.payload.item.id;
+    // console.log({ id });
     return (
       <div className="Ingredient">
         {list.map((arr, index) => {
@@ -29,11 +36,16 @@ class Ingredient extends Component {
                     <div className="Item">
                       <button
                         className="ItemButton"
-                        // onClick={() =>
-                        //   this.ItemButtons(list, arr, index, item, indexItem)
-                        // }
+                        onClick={() =>
+                          this.ItemButtonOnClick(
+                            list,
+                            arr,
+                            index,
+                            item,
+                            indexItem
+                          )
+                        }
                       >
-                        {/* {item} */}
                         <img
                           className="ItemImg"
                           src={item.img}
@@ -58,6 +70,12 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {};
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    onItemButtonClick: (list, arr, index, item, indexItem) => {
+      dispatch(ON_ITEM_BUTTON_CLICK(list, arr, index, item, indexItem));
+    },
+  };
+};
 
-export default connect(mapStateToProps, null)(Ingredient);
+export default connect(mapStateToProps, mapDispatchToProps)(Ingredient);

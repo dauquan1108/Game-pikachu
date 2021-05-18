@@ -8,7 +8,6 @@
     background-color: #ffffff;
     min-width: 100vh !important;
     min-Height: 100vh !important;
-    color: black !important;
     /* ô */
 }
 
@@ -16,7 +15,6 @@
     background-color: #0d1117;
     min-width: 100vh !important;
     min-Height: 100vh !important;
-    color: white !important;
     /* ô */
 }
 
@@ -32,6 +30,18 @@
     height: 30px;
     background-color: #7cf20d85;
     border-radius: 6px;
+    color: #000;
+    font-weight: bold;
+}
+
+.Button-Color_ {
+    /* chau1 */
+    width: 80px;
+    height: 30px;
+    background-color: #7cf20d85;
+    border-radius: 6px;
+    color: azure;
+    font-weight: bold;
 }
 
 .Content {

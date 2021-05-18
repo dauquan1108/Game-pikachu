@@ -1,10 +1,14 @@
 import * as types from "../constants/ActionTypes";
 
-export const ON_GET_LIST_VIEW_DATA_MAIN = (dataMain) => {
+export const ON_ITEM_BUTTON_CLICK = (list, arr, index, item, indexItem) => {
   return {
-    type: types.GET_LIST_VIEW_DATA_MAIN,
+    type: types.ITEM_BUTTON_CLICK,
     payload: {
-      dataMain,
+      list,
+      arr,
+      index,
+      item,
+      indexItem,
     },
   };
 };
