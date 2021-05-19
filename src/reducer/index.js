@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
 
-import Stor from "./Stor";
+import StoreReducers from "./storeReducers";
 
 const appPiKaChu = combineReducers({
-  Stor,
+  StoreReducers,
 });
 export default appPiKaChu;

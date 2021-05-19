@@ -1,6 +1,6 @@
 import { all } from "redux-saga/effects";
-import {} from "./SagaGame";
+import { watcherGetDataMain } from "./SagaGame";
 
 export default function* mySaga() {
-  yield all([]);
+  yield all([watcherGetDataMain()]);
 }

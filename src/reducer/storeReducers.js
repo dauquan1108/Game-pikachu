@@ -19,24 +19,24 @@ import a17 from "../images/pokemon_17.png";
 import a18 from "../images/pokemon_18.png";
 
 const dataStor = [
-  { id: 0, img: a1, check: false },
-  { id: 1, img: a2, check: false },
-  { id: 2, img: a3, check: false },
-  { id: 3, img: a4, check: false },
-  { id: 4, img: a5, check: false },
-  { id: 5, img: a6, check: false },
-  { id: 6, img: a7, check: false },
-  { id: 7, img: a8, check: false },
-  { id: 8, img: a9, check: false },
-  { id: 9, img: a10, check: false },
-  { id: 10, img: a11, check: false },
-  { id: 11, img: a12, check: false },
-  { id: 12, img: a13, check: false },
-  { id: 13, img: a14, check: false },
-  { id: 14, img: a15, check: false },
-  { id: 15, img: a16, check: false },
-  { id: 16, img: a17, check: false },
-  { id: 17, img: a18, check: false },
+  { id: 0, img: a1, check: 0 },
+  { id: 1, img: a2, check: 0 },
+  { id: 2, img: a3, check: 0 },
+  { id: 3, img: a4, check: 0 },
+  { id: 4, img: a5, check: 0 },
+  { id: 5, img: a6, check: 0 },
+  { id: 6, img: a7, check: 0 },
+  { id: 7, img: a8, check: 0 },
+  { id: 8, img: a9, check: 0 },
+  { id: 9, img: a10, check: 0 },
+  { id: 10, img: a11, check: 0 },
+  { id: 11, img: a12, check: 0 },
+  { id: 12, img: a13, check: 0 },
+  { id: 13, img: a14, check: 0 },
+  { id: 14, img: a15, check: 0 },
+  { id: 15, img: a16, check: 0 },
+  { id: 16, img: a17, check: 0 },
+  { id: 17, img: a18, check: 0 },
 ];
 
 const cols = 12;
@@ -45,17 +45,21 @@ const limit = 4;
 
 const setState = (initialState) => {
   for (let i = 0; i < cols; i++) {
+    // lay ngau nhien 1 so nguyen trong mang
     const rand = Math.floor(Math.random() * dataStor.length);
+    //
     const item = dataStor[rand];
     initialState.push({
       id: item.id,
       img: item.img,
-      status: item.status,
+      status: false,
     });
+    //kiem tra mang phan tu do da = voi so luong mac dinh (4) chua neu roi thi xoa di phan tu do roi tiep den phan tu khac
     item.check++;
     if (item.check === limit) {
       dataStor.splice(rand, 1);
     }
+    //
   }
   return initialState;
 };
@@ -70,15 +74,17 @@ const setStateTwo = (initialStateTwo) => {
 
 const newState = setStateTwo([]);
 
-const Stor = (state = newState, action) => {
+const StoreReducers = (state = newState, action) => {
   switch (action.type) {
     case types.ITEM_BUTTON_CLICK:
-      const id = action.payload.item.id;
-      console.log({ id });
+      state[action.payload.x][action.payload.y].status =
+        !state[action.payload.x][action.payload.y].status;
+      const item = action.payload.item;
+      console.log({ item });
       return [...state];
     default:
       return [...state];
   }
 };
 
-export default Stor;
+export default StoreReducers;

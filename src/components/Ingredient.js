@@ -2,48 +2,31 @@ import React, { Component } from "react";
 import "./style.css";
 //React-Redux --- npm install react-redux
 import { connect } from "react-redux";
-
+//Redux
 import { ON_ITEM_BUTTON_CLICK } from "../actions/index";
 
 class Ingredient extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      clickButton: false,
-    };
-  }
   ItemButtonOnClick = (list, arr, index, item, indexItem) => {
-    this.setState({
-      clickButton: !this.state.clickButton,
-    });
     const { onItemButtonClick } = this.props;
     onItemButtonClick(list, arr, index, item, indexItem);
   };
   render() {
-    const clickButton = this.state.clickButton ? "ItemButton" : "ItemButton_";
     const { list } = this.props;
-    console.log({ list });
-    // const id = list.payload.item.id;
-    // console.log({ id });
     return (
       <div className="Ingredient">
-        {list.map((arr, index) => {
+        {list.map((arr, x) => {
           return (
-            <div key={index} className="row">
-              {arr.map((item, indexItem) => {
+            <div key={x} className="row">
+              {arr.map((item, y) => {
                 return (
-                  <div key={indexItem}>
+                  <div key={y}>
                     <div className="Item">
                       <button
-                        className="ItemButton"
+                        className={
+                          item.status === false ? "ItemButton" : "ItemButton_"
+                        }
                         onClick={() =>
-                          this.ItemButtonOnClick(
-                            list,
-                            arr,
-                            index,
-                            item,
-                            indexItem
-                          )
+                          this.ItemButtonOnClick(list, arr, x, item, y)
                         }
                       >
                         <img
@@ -66,7 +49,7 @@ class Ingredient extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    list: state.Stor,
+    list: state.StoreReducers,
   };
 };
 
