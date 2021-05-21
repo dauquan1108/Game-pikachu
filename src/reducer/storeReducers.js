@@ -38,7 +38,6 @@ const dataStor = [
   { id: 16, img: a17, check: 0 },
   { id: 17, img: a18, check: 0 },
 ];
-
 const cols = 12;
 const rows = 6;
 const limit = 4;
@@ -63,7 +62,6 @@ const setState = (initialState) => {
   }
   return initialState;
 };
-
 const setStateTwo = (initialStateTwo) => {
   for (let i = 0; i < rows; i++) {
     const array = setState([]);
@@ -71,16 +69,17 @@ const setStateTwo = (initialStateTwo) => {
   }
   return initialStateTwo;
 };
-
 const newState = setStateTwo([]);
 
 const StoreReducers = (state = newState, action) => {
   switch (action.type) {
     case types.ITEM_BUTTON_CLICK:
-      state[action.payload.x][action.payload.y].status =
-        !state[action.payload.x][action.payload.y].status;
-      const item = action.payload.item;
-      console.log({ item });
+      const x = action.payload.x;
+      // const y = action.payload.y;
+      // const states = (state[x][y].status = !state[x][y].status);
+      // if (states === true) {
+      //   return [...state], (checkItem = { x, y });
+      // }
       return [...state];
     default:
       return [...state];
