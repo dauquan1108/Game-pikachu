@@ -25,7 +25,7 @@ class Ingredient extends Component {
         (x === xItem1 && this.checkLineX(yItem1, y, x, xItem1)) ||
         (y === yItem1 && this.checkLineY(xItem1, x, y, yItem1))
       ) {
-        console.log("tmdk");
+        // console.log("tmdk");
         const { onItemButtonClick } = this.props;
         onItemButtonClick(x, y, item, xItem1, yItem1, item1);
       }

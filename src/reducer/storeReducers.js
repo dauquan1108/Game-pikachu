@@ -74,13 +74,30 @@ const newState = setStateTwo([]);
 const StoreReducers = (state = newState, action) => {
   switch (action.type) {
     case types.ITEM_BUTTON_CLICK:
+      // debugger;
       const x = action.payload.x;
       const y = action.payload.y;
+      const item = action.payload.item;
       const xItem1 = action.payload.xItem1;
       const yItem1 = action.payload.yItem1;
-      console.log({ state });
-      console.log({ x }, { y });
-      console.log({ xItem1 }, { yItem1 });
+      const item1 = action.payload.item1;
+      // console.log({ state });
+      console.log({ x }, { y }, { item });
+      console.log({ xItem1 }, { yItem1 }, { item1 });
+      // state.map((items, index) => {
+      //   if (index === y && index === yItem1) {
+      //     items.map((itemNew, indexItem) => {
+      //       if (
+      //         itemNew.id === item.id &&
+      //         indexItem === x &&
+      //         itemNew.id === item1.id &&
+      //         indexItem === xItem1
+      //       ) {
+      //         console.log("ok");
+      //       }
+      //     });
+      //   }
+      // });
       return [...state];
     default:
       return [...state];

@@ -1,6 +1,6 @@
 .Ingredient {
     /* ô */
-    padding-left: 15%;
+    padding-left: 6.875em;
 }
 
 .row {
@@ -49,7 +49,60 @@
 
 @media only screen and (min-width: 740px) and (max-width: 1023px) {
     .Ingredient {
-        background-color: red;
-        padding-left: 0;
+        width: 656px;
+        padding: 1px;
+    }
+    .Item  {
+        /* con */
+        text-align: center;
+        width: 50px;
+        height: 50px;
+        margin: 0px 5px 5px 0px;
+    }
+    .Item_  {
+        /* con */
+        text-align: center;
+        width: 50px;
+        height: 50px;
+        margin: 0px 5px 5px 0px;
+        border: 1px solid;
+    }
+    
+    .ItemButton {
+        /* chau */
+        width: 50px;
+        height: 50px;
+    }
+    .ItemImg {
+        /* chat */
+        width: 50px;
+        height: 50px;
     }
 }
+
+
+@media only screen and (max-width: 739px) {
+    .Ingredient {
+        padding-left: 0px;
+    }
+    .Item  {
+        /* con */
+        text-align: center;
+        width: 30px;
+        height: 30px;
+        margin: -2px;
+    }
+    .Item_  {   
+        /* con */
+        text-align: center;
+        width: 30px;
+        height: 30px;
+        margin: -2px;
+    }
+    .ItemButton {
+        /* chau */
+        width: 80%;
+        height: 80%;
+        opacity: 2;
+    }
+ }
