@@ -9,69 +9,80 @@ class Ingredient extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      item1: null,
       xItem1: null,
       yItem1: null,
     };
   }
 
-  ItemButtonOnClick = (x, y) => {
-    const { xItem1, yItem1 } = this.state;
-    if (!xItem1) {
-      this.setState({ xItem1: x, yItem1: y });
-    }
-    if (xItem1) {
-      // console.log({ xItem1 }, { yItem1 });
-      // check thuat toan
-      // if(this.checkLineX(item1, x1, y1, item, x, y) || l || u || z) {
-      //   ban ac tion
-      // };
-      if (this.checkLineX(xItem1, yItem1, x, y)) {
+  ItemButtonOnClick = (x, y, item) => {
+    const { item1, xItem1, yItem1 } = this.state;
+    // debugger;
+    if (!item1) {
+      this.setState({ item1: item, xItem1: x, yItem1: y });
+    } else {
+      if (
+        (x === xItem1 && this.checkLineX(yItem1, y, x, xItem1)) ||
+        (y === yItem1 && this.checkLineY(xItem1, x, y, yItem1))
+      ) {
         console.log("tmdk");
         // const { onItemButtonClick } = this.props;
         // onItemButtonClick(list, arr, x, item, y);
       }
       this.setState({
+        item1: null,
         xItem1: null,
         yItem1: null,
       });
     }
   };
-  checkLineX = (xItem1, yItem1, x, y) => {
-    console.log({ x });
-    console.log({ y });
-    //debugger;
-    // const { list } = this.props;
-    // var min = Math.min(yItem1, y);
-    // var max = Math.max(yItem1, y);
-    // console.log({ min });
-    // console.log({ max });
-    // if (xItem1 === x) {
-    //   for (let i = min + 1; i <= max; i++) {
-    //     if (list[xItem1][i].status === true) {
-    //       return false;
-    //     }
-    //   }
+
+  checkLineX = (yItem1, y, x, xItem1) => {
+    const { list } = this.props;
+    let min = Math.min(yItem1, y);
+    let max = Math.max(yItem1, y);
+    if (x === xItem1) {
+      for (let i = min + 1; i < max; i++) {
+        if (!list[x][i].status) {
+          return false;
+        }
+      }
+      return true;
+    }
+  };
+  checkLineY = (xItem1, x, y, yItem1) => {
+    const { list } = this.props;
+    let min = Math.min(xItem1, x);
+    let max = Math.max(xItem1, x);
+    // debugger;
+    // if (list[xItem1][y].id === list[x][y].id && max - min === 1) {
     //   return true;
     // }
+    if (y === yItem1) {
+      for (let i = min + 1; i < max; i++) {
+        if (!list[y][i].status) {
+          return false;
+        }
+      }
+      return true;
+    }
   };
 
   render() {
     const { list } = this.props;
     return (
       <div className="Ingredient">
-        {list.map((arr, x) => {
+        {list.map((arr, y) => {
           return (
-            <div key={x} className="row">
-              {arr.map((item, y) => {
+            <div key={y} className="row">
+              {arr.map((item, x) => {
                 return (
-                  <div key={y}>
+                  <div key={x}>
                     <div className="Item">
                       <button
                         className="ItemButton"
                         // {item.status === false ? "ItemButton" : "ItemButton_"}
-                        onClick={() =>
-                          this.ItemButtonOnClick(list, arr, x, item, y)
-                        }
+                        onClick={() => this.ItemButtonOnClick(x, y, item)}
                       >
                         <img
                           className="ItemImg"

@@ -74,7 +74,7 @@ const newState = setStateTwo([]);
 const StoreReducers = (state = newState, action) => {
   switch (action.type) {
     case types.ITEM_BUTTON_CLICK:
-      const x = action.payload.x;
+      // const x = action.payload.x;
       // const y = action.payload.y;
       // const states = (state[x][y].status = !state[x][y].status);
       // if (states === true) {
