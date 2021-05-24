@@ -26,8 +26,8 @@ class Ingredient extends Component {
         (y === yItem1 && this.checkLineY(xItem1, x, y, yItem1))
       ) {
         console.log("tmdk");
-        // const { onItemButtonClick } = this.props;
-        // onItemButtonClick(list, arr, x, item, y);
+        const { onItemButtonClick } = this.props;
+        onItemButtonClick(x, y, item, xItem1, yItem1, item1);
       }
       this.setState({
         item1: null,
@@ -66,6 +66,23 @@ class Ingredient extends Component {
       }
       return true;
     }
+  };
+
+  checkRectX = (pMin, pMax) => {
+    const { list } = this.props;
+    if (pMin.x > pMax.x) {
+      [pMin, pMax] = [pMax, pMin];
+    }
+    for (let i = pMin.x + 1; i < pMax.x; i++) {
+      if (
+        this.checkLineX(list, pMin.y, pMin.y, pMin.x, i) &&
+        this.checkLineY(list, pMin.y, pMax.y, i, i) &&
+        this.checkLineX(list, pMax.y, pMax.y, i, pMax.x)
+      ) {
+        return true;
+      }
+    }
+    return false;
   };
 
   render() {
@@ -110,8 +127,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    onItemButtonClick: (list, arr, index, item, indexItem) => {
-      dispatch(ON_ITEM_BUTTON_CLICK(list, arr, index, item, indexItem));
+    onItemButtonClick: (x, y, item, xItem1, yItem1, item1) => {
+      dispatch(ON_ITEM_BUTTON_CLICK(x, y, item, xItem1, yItem1, item1));
     },
   };
 };
