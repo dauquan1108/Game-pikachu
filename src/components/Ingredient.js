@@ -3,8 +3,6 @@ import "./style.css";
 import ViewGame from "./ViewGame";
 //React-Redux --- npm install react-redux
 import { connect } from "react-redux";
-//Redux
-import { ON_ITEM_BUTTON_CLICK } from "../actions/index";
 
 class Ingredient extends Component {
   // constructor(props) {
@@ -107,12 +105,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch, props) => {
-  return {
-    onItemButtonClick: (x, y, item, xItem1, yItem1, item1) => {
-      dispatch(ON_ITEM_BUTTON_CLICK(x, y, item, xItem1, yItem1, item1));
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Ingredient);
+export default connect(mapStateToProps, null)(Ingredient);
