@@ -8,17 +8,23 @@ class App extends Component {
       status: true,
     };
   }
+
   buttonClick = () => {
-    this.setState({ status: !this.state.status });
+    this.setState((prevState) => ({
+      status: !prevState.status,
+    }));
   };
+
   render() {
-    const check = this.state.status ? " App" : " App_";
-    const status = this.state.status ? "Button-Color" : "Button-Color_";
+    const { status } = this.state;
+
+    const styleApp = status ? " App" : " App_";
+    const styleBtn = status ? "Button-Color" : "Button-Color_";
     return (
-      <div className={check}>
+      <div className={styleApp}>
         <div className="Button">
-          <button className={status} onClick={this.buttonClick}>
-            {this.state.status ? " light" : " dark"}
+          <button className={styleBtn} onClick={this.buttonClick}>
+            {status ? " light" : " dark"}
           </button>
         </div>
         <div className="Content">
@@ -28,4 +34,5 @@ class App extends Component {
     );
   }
 }
+
 export default App;

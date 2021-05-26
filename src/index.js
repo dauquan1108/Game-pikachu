@@ -26,11 +26,9 @@ const store = createStore(
 // Run Saga
 sagaMiddleware.run(SagaGame);
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById("root")
 );
 

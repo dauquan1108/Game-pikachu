@@ -69,21 +69,57 @@ const setStateTwo = (initialStateTwo) => {
   }
   return initialStateTwo;
 };
-const newState = setStateTwo([]);
 
-const StoreReducers = (state = newState, action) => {
+const initState = {
+  list: setStateTwo([]),
+  firstItem: null,
+};
+const StoreReducers = (state = initState, action) => {
   switch (action.type) {
     case types.ITEM_BUTTON_CLICK:
-      const x = action.payload.x;
-      const y = action.payload.y;
-      const xItem1 = action.payload.xItem1;
-      const yItem1 = action.payload.yItem1;
-      state[y][x].status = !state[y][y].status;
-      state[yItem1][xItem1].status = !state[yItem1][xItem1].status;
-      return [...state];
+      const { list, firstItem } = state;
+      const { item } = action.payload;
+      if (firstItem === null) {
+        return { ...state, firstItem: item };
+      } else {
+        if (
+          firstItem.item.id === item.item.id &&
+          item.x !== firstItem.x &&
+          firstItem.y === item.y &&
+          checkLineX(list, firstItem, item)
+        ) {
+          // Trương hợp ăn được sẽ vào đây
+          console.log("ok");
+          list[firstItem.x][firstItem.y].status = true;
+          list[item.x][item.y].status = true;
+          return { ...state, firstItem: null };
+        } else {
+          // Không ăn được thì trả về rỗng
+          return { ...state, firstItem: null };
+        }
+      }
     default:
-      return [...state];
+      return { ...state };
   }
 };
+
+//  Ăn theo cột
+function checkLineX(list, firstItem, item) {
+  // console.log("ok");
+  const y1 = firstItem.y;
+  const y2 = item.y;
+  const x = item.x;
+  let min = Math.min(y1, y2);
+  let max = Math.max(y1, y2);
+  // debugger;
+  for (let i = min + 1; i < max; i++) {
+    const test = list[x][i].status;
+    console.log({ test });
+    // if (list[x][i].status === false) {
+    //   return false;
+    // }
+  }
+  return true;
+}
 
 export default StoreReducers;

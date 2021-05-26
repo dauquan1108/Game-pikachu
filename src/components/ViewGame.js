@@ -9,28 +9,33 @@ class ViewGame extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      item1: null,
+      visible: false,
     };
   }
-  ItemButtonOnClick = (item, x, y) => {
-    const { item1 } = this.state;
-    console.log({ item }, { x }, { y });
-    if (item1) {
-      this.setState({ item1: item, xItem1: x, yItem1: y });
-    } else {
-      this.setState({
-        item1: null,
-      });
-    }
+  ItemButtonOnClick = () => {
+    const { visible } = this.state;
+    this.setState({
+      visible: !visible,
+    });
+    // debugger
+    const { item, x, y, onItemButtonClick } = this.props;
+    const itemClick = {
+      x,
+      y,
+      item,
+    };
+    onItemButtonClick(itemClick);
   };
+
   render() {
-    const { item, x, y } = this.props;
+    const { item } = this.props;
+    const { visible } = this.state;
     return (
       <div className="ViewGame">
-        <div className="Item">
+        <div className={item.status ? "Item" : "Item_"}>
           <button
-            className={item.status === true ? "ItemButton_" : "ItemButton"}
-            onClick={() => this.ItemButtonOnClick(item, x, y)}
+            className={visible ? "ItemButton_" : "ItemButton"}
+            onClick={this.ItemButtonOnClick}
           >
             <img className="ItemImg" src={item.img} alt="icon-pokemon" />
           </button>
@@ -41,8 +46,8 @@ class ViewGame extends Component {
 }
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    onItemButtonClick: (x, y, item, xItem1, yItem1, item1) => {
-      dispatch(ON_ITEM_BUTTON_CLICK(x, y, item, xItem1, yItem1, item1));
+    onItemButtonClick: (item) => {
+      dispatch(ON_ITEM_BUTTON_CLICK(item));
     },
   };
 };
