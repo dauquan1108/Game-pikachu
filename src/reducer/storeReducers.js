@@ -83,13 +83,17 @@ const StoreReducers = (state = initState, action) => {
         return { ...state, firstItem: item };
       } else {
         if (
-          firstItem.item.id === item.item.id &&
-          item.x !== firstItem.x &&
-          firstItem.y === item.y &&
-          checkLineX(list, firstItem, item)
+          (firstItem.item.id === item.item.id &&
+            item.x !== firstItem.x &&
+            firstItem.y === item.y &&
+            checkLineX(list, firstItem, item)) ||
+          (firstItem.item.id === item.item.id &&
+            item.y !== firstItem.y &&
+            firstItem.x === item.x &&
+            checkLineY(list, firstItem, item)) ||
+          checkRectX(list, firstItem, item)
         ) {
           // Trương hợp ăn được sẽ vào đây
-          console.log("ok");
           list[firstItem.x][firstItem.y].status = true;
           list[item.x][item.y].status = true;
           return { ...state, firstItem: null };
@@ -105,21 +109,52 @@ const StoreReducers = (state = initState, action) => {
 
 //  Ăn theo cột
 function checkLineX(list, firstItem, item) {
-  // console.log("ok");
-  const y1 = firstItem.y;
-  const y2 = item.y;
-  const x = item.x;
+  const y1 = firstItem.x;
+  const y2 = item.x;
+  const x = item.y;
   let min = Math.min(y1, y2);
   let max = Math.max(y1, y2);
-  // debugger;
   for (let i = min + 1; i < max; i++) {
     const test = list[x][i].status;
     console.log({ test });
-    // if (list[x][i].status === false) {
-    //   return false;
-    // }
+    if (list[x][i].status === false) {
+      return false;
+    }
   }
   return true;
+}
+function checkLineY(list, firstItem, item) {
+  const x1 = firstItem.y;
+  const x2 = item.y;
+  const y = item.x;
+  let min = Math.min(x1, x2);
+  let max = Math.max(x1, x2);
+  for (let i = min + 1; i < max; i++) {
+    const test = list[y][i].status;
+    console.log({ test });
+    if (list[y][i].status === false) {
+      return false;
+    }
+  }
+  return true;
+}
+function checkRectX(list, firstItem, item) {
+  const pMinY = firstItem;
+  const pMaxY = item;
+  if (firstItem.x > item.x) {
+    pMinY = item;
+    pMaxY = firstItem;
+  }
+  // for (let i = pMinY.x + 1; i < pMaxY.x; i++) {
+  //   if (
+  //     checkLineX(firstItem.x, item.x, item.y) &&
+  //     checkLineY(firstItem.y, item.y, item.x) &&
+  //     checkLineX(item.x, pMinY.x, firstItem.x)
+  //   ) {
+  //     return true;
+  //   }
+  // }
+  // return false;
 }
 
 export default StoreReducers;
