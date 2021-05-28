@@ -73,11 +73,12 @@ const setStateTwo = (initialStateTwo) => {
 const initState = {
   list: setStateTwo([]),
   firstItem: null,
+  type: 1,
 };
 const StoreReducers = (state = initState, action) => {
   switch (action.type) {
     case types.ITEM_BUTTON_CLICK:
-      const { list, firstItem } = state;
+      const { list, firstItem, type } = state;
       const { item } = action.payload;
       if (firstItem === null) {
         return { ...state, firstItem: item };
@@ -93,7 +94,8 @@ const StoreReducers = (state = initState, action) => {
           checkLineY(list, x1, x2, y, firstItem, item) ||
           checkRectX(list, firstItem, item) ||
           checkRectY(list, firstItem, item) ||
-          checkMoreLineX(list, firstItem, item)
+          checkMoreLineX(list, firstItem, item, type)
+          // checkTwoPoint(list, firstItem, item)
         ) {
           list[firstItem.x][firstItem.y].status = true;
           list[item.x][item.y].status = true;
@@ -110,7 +112,6 @@ const StoreReducers = (state = initState, action) => {
 
 // cot  ( chung x )
 function checkLineX(list, y1, y2, x, firstItem, item) {
-  console.log("x", { y1 }, { y2 }, { x }, { firstItem }, { item });
   let min = Math.min(y1, y2);
   let max = Math.max(y1, y2);
   if (
@@ -131,7 +132,7 @@ function checkLineX(list, y1, y2, x, firstItem, item) {
 }
 // hang  ( chung y )
 function checkLineY(list, x1, x2, y, firstItem, item) {
-  console.log("y", { x1 }, { x2 }, { y }, { firstItem }, { item });
+  // console.log("y", { x1 }, { x2 }, { y }, { firstItem }, { item });
   let min = Math.min(x1, x2);
   let max = Math.max(x1, x2);
   if (
@@ -150,7 +151,7 @@ function checkLineY(list, x1, x2, y, firstItem, item) {
   }
   return true;
 }
-//
+// ăn theo chữ z
 function checkRectX(list, firstItem, item) {
   let pMinY = firstItem;
   let pMaxY = item;
@@ -172,7 +173,7 @@ function checkRectX(list, firstItem, item) {
   }
   return false;
 }
-//
+// ăn theo chữ z
 function checkRectY(list, firstItem, item) {
   let pMinX = firstItem;
   let pMaxX = item;
@@ -194,10 +195,10 @@ function checkRectY(list, firstItem, item) {
   }
   return false;
 }
-function checkMoreLineX(list, firstItem, item) {
-  let type = 1;
+function checkMoreLineX(list, firstItem, item, type) {
   let pMinY = firstItem;
   let pMaxY = item;
+  console.log({ pMinY }, { pMaxY });
   if (firstItem.y > item.y) {
     pMinY = item;
     pMaxY = firstItem;
@@ -214,8 +215,36 @@ function checkMoreLineX(list, firstItem, item) {
         return true;
       }
       y += type;
+      if (!list[pMinY.x][y]) {
+        return true;
+      }
     }
   }
   return false;
 }
+
+// function checkTwoPoint(list, firstItem, item) {
+//   //check line with x
+//   if (firstItem.x === item.x) {
+//     if (checkLineX(list, firstItem.y, item.y, item.x, firstItem, item)) {
+//       return true;
+//     }
+//   }
+//   //check line with y
+//   if (firstItem.y === item.y) {
+//     if (checkLineY(list, firstItem.x, item.x, item.y, firstItem, item)) {
+//       return true;
+//     }
+//   }
+//   let type = -1;
+//   if ((type = checkRectX(list, firstItem, item) !== -1)) {
+//     return true;
+//   }
+//   if ((type = checkRectY(list, firstItem, item) !== -1)) {
+//     return true;
+//   }
+//   if ((type = checkMoreLineX(list, firstItem, item, 1)) !== 1) {
+//     return true;
+//   }
+// }
 export default StoreReducers;
