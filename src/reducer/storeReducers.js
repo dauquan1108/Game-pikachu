@@ -1,4 +1,3 @@
-import * as types from "../constants/ActionTypes";
 import a1 from "../images/pokemon_1.png";
 import a2 from "../images/pokemon_2.png";
 import a3 from "../images/pokemon_3.png";
@@ -51,7 +50,7 @@ const setState = (initialState) => {
     initialState.push({
       id: item.id,
       img: item.img,
-      status: false,
+      visible: true,
     });
     //kiem tra mang phan tu do da = voi so luong mac dinh (4) chua neu roi thi xoa di phan tu do roi tiep den phan tu khac
     item.check++;
@@ -73,32 +72,22 @@ const setStateTwo = (initialStateTwo) => {
 const initState = {
   list: setStateTwo([]),
   firstItem: null,
-  type: 1,
 };
+
 const StoreReducers = (state = initState, action) => {
   switch (action.type) {
-    case types.ITEM_BUTTON_CLICK:
-      const { list, firstItem, type } = state;
+    case "ITEM_BUTTON_CLICK":
+      const { list, firstItem } = state;
       const { item } = action.payload;
       if (firstItem === null) {
         return { ...state, firstItem: item };
       } else {
-        const x = item.x;
-        const y = item.y;
-        const x1 = firstItem.x;
-        const y1 = firstItem.y;
-        const x2 = item.x;
-        const y2 = item.y;
         if (
-          checkLineX(list, y1, y2, x, firstItem, item) ||
-          checkLineY(list, x1, x2, y, firstItem, item) ||
-          checkRectX(list, firstItem, item) ||
-          checkRectY(list, firstItem, item) ||
-          checkMoreLineX(list, firstItem, item, type)
-          // checkTwoPoint(list, firstItem, item)
+          firstItem.item.id === item.item.id &&
+          checkAll(list, firstItem, item)
         ) {
-          list[firstItem.x][firstItem.y].status = true;
-          list[item.x][item.y].status = true;
+          list[firstItem.x][firstItem.y].visible = false;
+          list[item.x][item.y].visible = false;
           return { ...state, firstItem: null };
         } else {
           // Không ăn được thì trả về rỗng
@@ -110,63 +99,64 @@ const StoreReducers = (state = initState, action) => {
   }
 };
 
+function checkAll(list, firstItem, secondItem) {
+  if (firstItem.x === secondItem.x && firstItem.y === secondItem.y) {
+    return false;
+  }
+  if (firstItem.x === secondItem.x) {
+    return checkLineX(list, firstItem, secondItem);
+  }
+  if (firstItem.y === secondItem.y) {
+    return checkLineY(list, firstItem, secondItem);
+  }
+
+  return (
+    checkRectX(list, firstItem, secondItem) ||
+    checkRectY(list, firstItem, secondItem) ||
+    checkMoreLineX(list, firstItem, secondItem)
+  );
+}
+
 // cot  ( chung x )
-function checkLineX(list, y1, y2, x, firstItem, item) {
-  let min = Math.min(y1, y2);
-  let max = Math.max(y1, y2);
-  if (
-    !(
-      firstItem.item.id === item.item.id &&
-      item.y !== firstItem.y &&
-      firstItem.x === item.x
-    )
-  ) {
-    return false;
-  }
+function checkLineX(list, firstItem, secondItem) {
+  let min = Math.min(firstItem.y, secondItem.y);
+  let max = Math.max(firstItem.y, secondItem.y);
+
   for (let i = min + 1; i < max; i++) {
-    if (list[x][i].status === false) {
+    if (list[firstItem.x][i].visible === true) {
       return false;
     }
   }
   return true;
 }
+
 // hang  ( chung y )
-function checkLineY(list, x1, x2, y, firstItem, item) {
-  // console.log("y", { x1 }, { x2 }, { y }, { firstItem }, { item });
-  let min = Math.min(x1, x2);
-  let max = Math.max(x1, x2);
-  if (
-    !(
-      firstItem.item.id === item.item.id &&
-      item.x !== firstItem.x &&
-      firstItem.y === item.y
-    )
-  ) {
-    return false;
-  }
+function checkLineY(list, firstItem, secondItem) {
+  let min = Math.min(firstItem.x, secondItem.x);
+  let max = Math.max(firstItem.x, secondItem.x);
+
   for (let i = min + 1; i < max; i++) {
-    if (list[i][y].status === false) {
+    if (list[i][secondItem.y].visible === true) {
       return false;
     }
   }
   return true;
 }
+
 // ăn theo chữ z
-function checkRectX(list, firstItem, item) {
+function checkRectX(list, firstItem, secondItem) {
   let pMinY = firstItem;
-  let pMaxY = item;
-  if (firstItem.y > item.y) {
-    pMinY = item;
+  let pMaxY = secondItem;
+  if (firstItem.y > secondItem.y) {
+    pMinY = secondItem;
     pMaxY = firstItem;
   }
-  if (!(firstItem.item.id === item.item.id)) {
-    return false;
-  }
+
   for (let y = pMinY.y + 1; y < pMaxY.y; y++) {
     if (
-      checkLineX(list, pMinY.y, y, pMinY.x, firstItem, item) &&
-      checkLineY(list, pMinY.x, pMaxY.x, y, firstItem, item) &&
-      checkLineX(list, y, pMaxY.y, pMaxY.x, firstItem, item)
+      checkLineX(list, firstItem, secondItem) &&
+      checkLineY(list, firstItem, secondItem) &&
+      checkLineX(list, firstItem, secondItem)
     ) {
       return true;
     }
@@ -174,47 +164,47 @@ function checkRectX(list, firstItem, item) {
   return false;
 }
 // ăn theo chữ z
-function checkRectY(list, firstItem, item) {
+function checkRectY(list, firstItem, secondItem) {
   let pMinX = firstItem;
-  let pMaxX = item;
-  if (firstItem.x > item.x) {
-    pMinX = item;
+  let pMaxX = secondItem;
+  if (firstItem.x > secondItem.x) {
+    pMinX = secondItem;
     pMaxX = firstItem;
   }
-  if (!(firstItem.item.id === item.item.id)) {
+  if (!(firstItem.item.id === secondItem.item.id)) {
     return false;
   }
   for (let x = pMinX.x + 1; x < pMaxX.x; x++) {
     if (
-      checkLineY(list, pMinX.x, x, pMinX.y, firstItem, item) &&
-      checkLineX(list, pMinX.y, pMaxX.y, x, firstItem, item) &&
-      checkLineY(list, x, pMaxX.x, pMaxX.y, firstItem, item)
+      checkLineY(list, firstItem, secondItem) &&
+      checkLineX(list, firstItem, secondItem) &&
+      checkLineY(list, firstItem, secondItem)
     ) {
       return true;
     }
   }
   return false;
 }
-function checkMoreLineX(list, firstItem, item, type) {
+function checkMoreLineX(list, firstItem, secondItem) {
   let pMinY = firstItem;
-  let pMaxY = item;
+  let pMaxY = secondItem;
   console.log({ pMinY }, { pMaxY });
-  if (firstItem.y > item.y) {
-    pMinY = item;
+  if (firstItem.y > secondItem.y) {
+    pMinY = secondItem;
     pMaxY = firstItem;
   }
   let y = pMaxY.y;
   let row = pMinY.x;
-  if (type === -1) {
-    y = pMinY.y;
-    row = pMaxY.x;
-  }
-  if (checkLineX(list, pMinY.y, pMaxY.y, row, firstItem, item)) {
-    while (list[pMinY.x][y].status && list[pMaxY.x][y].status) {
-      if (checkLineY(list, pMinY.x, pMaxY.x, y, firstItem, item)) {
+  // if (type === -1) {
+  //   y = pMinY.y;
+  //   row = pMaxY.x;
+  // }
+  if (checkLineX(list, pMinY.y, pMaxY.y, row, firstItem, secondItem)) {
+    while (list[pMinY.x][y].visible && list[pMaxY.x][y].visible) {
+      if (checkLineY(list, pMinY.x, pMaxY.x, y, firstItem, secondItem)) {
         return true;
       }
-      y += type;
+      // y += type;
       if (!list[pMinY.x][y]) {
         return true;
       }

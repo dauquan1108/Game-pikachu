@@ -6,19 +6,20 @@ import { connect } from "react-redux";
 
 class Ingredient extends Component {
   render() {
-    const { list } = this.props;
+    const { totalList } = this.props;
     return (
       <div className="Ingredient">
-        {list.list.map((arr, x) => {
-          return (
-            <div key={x} className="row">
-              {arr.map((item, y) => {
-                const itemNew = { ...item };
-                return <ViewGame key={y} item={itemNew} x={x} y={y} />;
-              })}
-            </div>
-          );
-        })}
+        {totalList.list &&
+          totalList.list.map((arr, x) => {
+            return (
+              <div key={x} className="row">
+                {arr.map((item, y) => {
+                  const itemNew = { ...item };
+                  return <ViewGame key={y} item={itemNew} x={x} y={y} />;
+                })}
+              </div>
+            );
+          })}
       </div>
     );
   }
@@ -26,7 +27,7 @@ class Ingredient extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    list: state.StoreReducers,
+    totalList: state.StoreReducers,
   };
 };
 

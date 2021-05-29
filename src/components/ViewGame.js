@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import "./style.css";
 //React-Redux --- npm install react-redux
 import { connect } from "react-redux";
-//Redux
-import { ON_ITEM_BUTTON_CLICK } from "../actions/index";
-
 class ViewGame extends Component {
   constructor(props) {
     super(props);
@@ -32,7 +29,7 @@ class ViewGame extends Component {
     const { visible } = this.state;
     return (
       <div className="ViewGame">
-        <div className={item.status ? "Item" : "Item_"}>
+        <div className={item.visible ? "Item_" : "Item"}>
           <button
             className={visible ? "ItemButton_" : "ItemButton"}
             onClick={this.ItemButtonOnClick}
@@ -46,9 +43,8 @@ class ViewGame extends Component {
 }
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    onItemButtonClick: (item) => {
-      dispatch(ON_ITEM_BUTTON_CLICK(item));
-    },
+    onItemButtonClick: (item) =>
+      dispatch({ type: "ITEM_BUTTON_CLICK", payload: { item } }),
   };
 };
 
