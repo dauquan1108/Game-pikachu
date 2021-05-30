@@ -112,8 +112,8 @@ function checkAll(list, firstItem, secondItem) {
 
   return (
     checkRectX(list, firstItem, secondItem) ||
-    checkRectY(list, firstItem, secondItem) ||
-    checkMoreLineX(list, firstItem, secondItem)
+    checkRectY(list, firstItem, secondItem)
+    // ||    checkMoreLineX(list, firstItem, secondItem)
   );
 }
 
@@ -153,13 +153,22 @@ function checkRectX(list, firstItem, secondItem) {
   }
 
   for (let y = pMinY.y + 1; y < pMaxY.y; y++) {
+    if (list[pMinY.x][y].visible !== false) {
+      return false;
+    }
     if (
-      checkLineX(list, firstItem, secondItem) &&
+      list[pMaxY.x][y].visible === false &&
       checkLineY(list, firstItem, secondItem) &&
       checkLineX(list, firstItem, secondItem)
     ) {
-      return true;
     }
+    // if (
+    //   checkLineX(list, firstItem, secondItem) &&
+    //   checkLineY(list, firstItem, secondItem) &&
+    //   checkLineX(list, firstItem, secondItem)
+    // ) {
+    //   return true;
+    // }
   }
   return false;
 }
@@ -171,47 +180,59 @@ function checkRectY(list, firstItem, secondItem) {
     pMinX = secondItem;
     pMaxX = firstItem;
   }
-  if (!(firstItem.item.id === secondItem.item.id)) {
-    return false;
-  }
   for (let x = pMinX.x + 1; x < pMaxX.x; x++) {
+    if (list[x][pMinX.y].visible !== false) {
+      return false;
+    }
     if (
-      checkLineY(list, firstItem, secondItem) &&
+      // checkLineY(list, firstItem, secondItem)
+      list[x][pMaxX.y].visible === false &&
       checkLineX(list, firstItem, secondItem) &&
       checkLineY(list, firstItem, secondItem)
     ) {
-      return true;
     }
   }
-  return false;
-}
-function checkMoreLineX(list, firstItem, secondItem) {
-  let pMinY = firstItem;
-  let pMaxY = secondItem;
-  console.log({ pMinY }, { pMaxY });
-  if (firstItem.y > secondItem.y) {
-    pMinY = secondItem;
-    pMaxY = firstItem;
-  }
-  let y = pMaxY.y;
-  let row = pMinY.x;
-  // if (type === -1) {
-  //   y = pMinY.y;
-  //   row = pMaxY.x;
+  // if (!(firstItem.item.id === secondItem.item.id)) {
+  //   return false;
   // }
-  if (checkLineX(list, pMinY.y, pMaxY.y, row, firstItem, secondItem)) {
-    while (list[pMinY.x][y].visible && list[pMaxY.x][y].visible) {
-      if (checkLineY(list, pMinY.x, pMaxY.x, y, firstItem, secondItem)) {
-        return true;
-      }
-      // y += type;
-      if (!list[pMinY.x][y]) {
-        return true;
-      }
-    }
-  }
+  // for (let x = pMinX.x + 1; x < pMaxX.x; x++) {
+  //   if (
+  //     checkLineY(list, firstItem, secondItem) &&
+  //     checkLineX(list, firstItem, secondItem) &&
+  //     checkLineY(list, firstItem, secondItem)
+  //   ) {
+  //     return true;
+  //   }
+  // }
   return false;
 }
+// function checkMoreLineX(list, firstItem, secondItem) {
+//   let pMinY = firstItem;
+//   let pMaxY = secondItem;
+//   console.log({ pMinY }, { pMaxY });
+//   if (firstItem.y > secondItem.y) {
+//     pMinY = secondItem;
+//     pMaxY = firstItem;
+//   }
+//   let y = pMaxY.y;
+//   let row = pMinY.x;
+//   // if (type === -1) {
+//   //   y = pMinY.y;
+//   //   row = pMaxY.x;
+//   // }
+//   if (checkLineX(list, pMinY.y, pMaxY.y, row, firstItem, secondItem)) {
+//     while (list[pMinY.x][y].visible && list[pMaxY.x][y].visible) {
+//       if (checkLineY(list, pMinY.x, pMaxY.x, y, firstItem, secondItem)) {
+//         return true;
+//       }
+//       // y += type;
+//       if (!list[pMinY.x][y]) {
+//         return true;
+//       }
+//     }
+//   }
+//   return false;
+// }
 
 // function checkTwoPoint(list, firstItem, item) {
 //   //check line with x
