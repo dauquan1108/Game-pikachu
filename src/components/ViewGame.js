@@ -14,7 +14,6 @@ class ViewGame extends Component {
     this.setState({
       visible: !visible,
     });
-    // debugger
     const { item, x, y, onItemButtonClick } = this.props;
     const itemClick = {
       x,

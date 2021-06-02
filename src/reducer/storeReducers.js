@@ -37,34 +37,59 @@ const dataStor = [
   { id: 16, img: a17, check: 0 },
   { id: 17, img: a18, check: 0 },
 ];
-const cols = 12;
-const rows = 6;
+const cols = 14;
+const rows = 8;
 const limit = 4;
+
+const nullRow = () => {
+  let arr = [];
+  for (let i = 0; i < cols; i++) {
+    arr.push({
+      id: -1,
+      img: null,
+      visible: false,
+    });
+  }
+  return arr;
+};
 
 const setState = (initialState) => {
   for (let i = 0; i < cols; i++) {
-    // lay ngau nhien 1 so nguyen trong mang
-    const rand = Math.floor(Math.random() * dataStor.length);
-    //
-    const item = dataStor[rand];
-    initialState.push({
-      id: item.id,
-      img: item.img,
-      visible: true,
-    });
-    //kiem tra mang phan tu do da = voi so luong mac dinh (4) chua neu roi thi xoa di phan tu do roi tiep den phan tu khac
-    item.check++;
-    if (item.check === limit) {
-      dataStor.splice(rand, 1);
+    if (i === 0 || i === cols - 1) {
+      initialState.push({
+        id: -1,
+        img: null,
+        visible: false,
+      });
+    } else {
+      // lay ngau nhien 1 so nguyen trong mang
+      const rand = Math.floor(Math.random() * dataStor.length);
+      //
+      const item = dataStor[rand];
+      initialState.push({
+        id: item.id,
+        img: item.img,
+        visible: true,
+      });
+      //kiem tra mang phan tu do da = voi so luong mac dinh (4) chua neu roi thi xoa di phan tu do roi tiep den phan tu khac
+      item.check++;
+      if (item.check === limit) {
+        dataStor.splice(rand, 1);
+      }
+      //
     }
-    //
   }
+
   return initialState;
 };
 const setStateTwo = (initialStateTwo) => {
   for (let i = 0; i < rows; i++) {
-    const array = setState([]);
-    initialStateTwo.push(array);
+    if (i === 0 || i === rows - 1) {
+      initialStateTwo.push(nullRow());
+    } else {
+      const array = setState([]);
+      initialStateTwo.push(array);
+    }
   }
   return initialStateTwo;
 };
@@ -99,103 +124,733 @@ const StoreReducers = (state = initState, action) => {
   }
 };
 
+// function checkAll(list, firstItem, secondItem) {
+//   let x1 = firstItem.x;
+//   let y1 = firstItem.y;
+//   let x2 = secondItem.x;
+//   let y2 = secondItem.y;
+//   let xMin, xMax, yMin, yMax, flag;
+//   if (x1 < x2) {
+//     xMin = x1;
+//     xMax = x2;
+//   } else {
+//     xMin = x2;
+//     xMax = x1;
+//   }
+//   if (y1 < y2) {
+//     yMin = y1;
+//     yMax = y2;
+//   } else {
+//     yMin = y2;
+//     yMax = y1;
+//   }
+//   if (x1 === x2) {
+//     if (yMax - yMin === 1) {
+//       return true;
+//     }
+//     flag = true;
+//     // check ngang:
+//     if (
+//       list[x1][yMin + 1].visible === false &&
+//       list[x1][yMax - 1].visible === false
+//     ) {
+//       for (let y = yMin + 2; y <= yMax - 1; y++) {
+//         if (list[x1][y].visible !== false) {
+//           flag = false;
+//         }
+//       }
+//       if (flag) return true;
+//     }
+//     // check tren
+//     for (let hang = x1 - 1; hang >= 0; hang--) {
+//       if (
+//         list[hang][y1].visible !== false ||
+//         list[hang][y2].visible !== false
+//       ) {
+//         break;
+//       } else {
+//         flag = true;
+//         for (let y = yMin + 1; y <= yMax; y++) {
+//           if (list[hang][y].visible !== false) flag = false;
+//         }
+//         if (flag) return true;
+//       }
+//     }
+//     // check duoi
+//     for (let hang = x1 + 1; hang <= list[1].length; hang++) {
+//       if (
+//         list[hang][y1].visible !== false ||
+//         list[hang][y2].visible !== false
+//       ) {
+//         break;
+//       } else {
+//         flag = true;
+//         for (let i = yMin + 1; i < yMax; i++) {
+//           if (list[hang][i].visible !== false) flag = false;
+//         }
+//         if (flag) return true;
+//       }
+//     }
+//     return false;
+//   } else if (y1 === y2) {
+//     if (xMax - xMin === 1) return true;
+//     flag = true;
+//     // check doc
+//     if (
+//       list[xMin + 1][y1].visible === false &&
+//       list[xMax - 1][y1].visible === false
+//     ) {
+//       for (let i = xMin + 2; i < xMax - 1; i++) {
+//         if (list[i][y1].visible !== false) flag = false;
+//       }
+//       if (flag) return true;
+//     }
+//     // check trai
+//     for (let cot = y1 - 1; cot >= 0; cot--) {
+//       if (list[x1][cot].visible !== false || list[x2][cot].visible !== false) {
+//         break;
+//       } else {
+//         flag = true;
+//         for (let i = xMin + 1; i < xMax; i++) {
+//           if (list[i][cot].visible !== false) {
+//             flag = false;
+//           }
+//         }
+//         if (flag) {
+//           return true;
+//         }
+//       }
+//     }
+//     // check phai
+//     for (let cot = y1 + 1; cot < list[0].length; cot++) {
+//       if (list[x1][cot].visible !== false || list[x2][cot].visible !== false) {
+//         break;
+//       } else {
+//         flag = true;
+//         for (let i = xMin + 1; i < xMax; i++) {
+//           if (list[i][cot].visible !== false) {
+//             flag = false;
+//             break;
+//           }
+//         }
+//         if (flag) return true;
+//       }
+//     }
+//     return false;
+//   }
+//   // TH o lech nhau
+//   else {
+//     flag = true;
+//     if (list[x1 - 1][y1].visible === false) {
+//       debugger;
+//       if (x1 > x2) {
+//         //an giua
+//         if (
+//           (y1 > y2 && list[x2][y2 + 1].visible === false) ||
+//           (y1 < y2 && list[y2 - 1].visible === false)
+//         ) {
+//           flag = true;
+//           for (let t = x1 - 1; t >= x2; t++) {
+//             if (list[t][y1].visible !== false) {
+//               flag = false;
+//               break;
+//             }
+//           }
+//           if (flag) {
+//             for (let t = yMax - 1; t > yMin; t--) {
+//               if (list[x2][t].visible !== false) {
+//                 flag = false;
+//                 break;
+//               }
+//             }
+//             console.log("ok");
+//             if (flag) return true;
+//           }
+//         }
+//         // an duoi
+//         if (list[x2 + 1][y2].visible === false) {
+//           for (let hang = x2 + 1; hang < x1; hang++) {
+//             if (list[hang][y2].visible !== false) {
+//               break;
+//             }
+//             for (let t = x1 - 1; t >= hang; t--) {
+//               if (list[t][y1].visible !== false) {
+//                 break;
+//               }
+//               if (hang === t) {
+//                 flag = true;
+//                 for (let cot = yMin + 1; cot < yMax; cot++) {
+//                   if (list[hang][cot].visible !== false) {
+//                     flag = false;
+//                     break;
+//                   }
+//                 }
+//                 console.log("ok2");
+//                 if (flag) return true;
+//               }
+//             }
+//           }
+//         }
+//       }
+//       // 1th an tren chung voi x1 < x2
+//       if (list[x2 - 1][y2].visible === false) {
+//         for (let hang = xMin - 1; hang >= 0; hang--) {
+//           if (
+//             list[hang][y1].visible !== false ||
+//             list[hang][y2].visible !== false
+//           ) {
+//             break;
+//           } else {
+//             flag = true;
+//             for (let t = x1 - 1; t > hang; t--) {
+//               if (list[t][y1].visible !== false) {
+//                 flag = false;
+//                 break;
+//               }
+//             }
+//             if (flag) {
+//               for (let t = x1 - 1; t > hang; t--) {
+//                 if (list[t][y2].visible !== false) {
+//                   flag = false;
+//                   break;
+//                 }
+//               }
+//               if (flag) {
+//                 for (let i = yMin + 1; i < yMax; i++) {
+//                   if (list[hang][i].visible !== false) {
+//                     flag = false;
+//                     break;
+//                   }
+//                 }
+//                 if (flag) return true;
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//     // ben duoi
+//     if (list[x1 + 1][y1].visible === false) {
+//       if (x1 < x2) {
+//         if (
+//           (y1 > y2 && list[x2][y2 + 1].visible === false) ||
+//           (y1 < y2 && list[x2][y2 - 1].visible === false)
+//         ) {
+//           flag = true;
+//           for (let t = x1 + 1; t <= x2; t++) {
+//             if (list[t][y1].visible !== false) {
+//               flag = false;
+//               break;
+//             }
+//           }
+//           if (flag) {
+//             for (let t = yMin + 1; t < yMax - 1; t++) {
+//               if (list[x2][t].visible !== false) {
+//                 flag = false;
+//                 break;
+//               }
+//             }
+//             if (flag) return true;
+//           }
+//         }
+//         // an tren:
+//         if (list[x2 - 1][y2].visible === false) {
+//           for (let hang = x2 - 1; hang > x1; hang--) {
+//             if (list[hang][y2].visible !== false) {
+//               break;
+//             }
+//             for (let t = x1 + 1; t <= hang; t++) {
+//               if (list[t][y1].visible !== false) {
+//                 break;
+//               }
+//               if (hang === t) {
+//                 flag = true;
+//                 for (let cot = yMin + 1; cot < yMax; cot++) {
+//                   if (list[hang][cot].visible !== 0) {
+//                     flag = false;
+//                     break;
+//                   }
+//                 }
+//                 if (flag) return true;
+//               }
+//             }
+//           }
+//         }
+//       }
+//       // 1TH an duoi cung voi x1 >x2
+//       if (list[x2][y2].visible !== false) {
+//         for (let hang = xMax + 1; hang < list.length; hang++) {
+//           if (
+//             list[hang][y1].visible !== false ||
+//             list[hang][y2].visible !== false
+//           ) {
+//             break;
+//           } else {
+//             flag = true;
+//             for (let t = x1 + 1; t < hang; t++) {
+//               if (list[t][y1].visible !== false) {
+//                 flag = false;
+//                 break;
+//               }
+//             }
+//             if (flag) {
+//               for (let t = x2 + 1; t < hang; t++) {
+//                 if (list[t][y2].visible !== 0) {
+//                   flag = false;
+//                   break;
+//                 }
+//               }
+//               if (flag) {
+//                 for (let i = yMin + 1; i < yMax; i++) {
+//                   if (list[hang][i].visible !== false) {
+//                     flag = false;
+//                     break;
+//                   }
+//                 }
+//                 if (flag) return true;
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//     // ben trai
+//     if (list[x1][y1 - 1].visible === false) {
+//       if (list[x2][y2 - 1].visible === false) {
+//         for (let cot = yMin - 1; cot >= 0; cot--) {
+//           if (
+//             list[x1][cot].visible !== false ||
+//             list[x2][cot].visible !== false
+//           ) {
+//             break;
+//           }
+//           flag = true;
+//           for (let t = y1 - 1; t > cot; t--) {
+//             if (list[x1][t].visible !== false) {
+//               flag = false;
+//               break;
+//             }
+//           }
+//           if (flag) {
+//             for (let t = y2 - 1; t > cot; t--) {
+//               if (list[x2][t].visible !== false) {
+//                 flag = false;
+//                 break;
+//               }
+//             }
+//             if (flag) {
+//               for (let hang = xMin + 1; hang < xMax; hang++) {
+//                 if (list[hang][cot].visible !== false) {
+//                   flag = false;
+//                   break;
+//                 }
+//               }
+//               if (flag) return true;
+//             }
+//           }
+//         }
+//       }
+//       if (y1 > y2) {
+//         // an phai
+//         if (list[x2][y2 + 1].visible === false) {
+//           for (let cot = y2 + 1; cot < y1; cot++) {
+//             if (list[x2][cot].visible !== false) {
+//               break;
+//             }
+//             for (let t = y1 - 1; t >= cot; t--) {
+//               if (list[x1][t].visible !== false) {
+//                 break;
+//               }
+//               if (cot === t) {
+//                 flag = true;
+//                 for (let hang = xMin + 1; hang < xMax; hang++) {
+//                   if (list[hang][cot].visible !== false) {
+//                     flag = false;
+//                     break;
+//                   }
+//                 }
+//                 if (flag) return true;
+//               }
+//             }
+//           }
+//         }
+//         // an tren/ duoi
+//         if (
+//           (x1 > x2 && list[x2 + 1][y2].visible === false) ||
+//           (x1 < x2 && list[x2 - 1][y2].visible === false)
+//         ) {
+//           if (list[x1][y1].visible === false) {
+//             flag = true;
+//             for (let t = xMin + 1; t < xMax; t++) {
+//               if (list[t][y2].visible !== false) {
+//                 flag = false;
+//                 break;
+//               }
+//             }
+//             if (flag) {
+//               for (let t = yMin + 1; t < yMax; t++) {
+//                 if (list[x1][t].visible !== false) {
+//                   flag = false;
+//                   break;
+//                 }
+//               }
+//               if (flag) return true;
+//             }
+//           }
+//         }
+//       }
+//     }
+//     // ben phai
+//     if (list[x1][y1 + 1].visible === false) {
+//       if (list[x2][y2 + 1].visible === false) {
+//         for (let cot = yMax + 1; cot < list[0].length; cot++) {
+//           if (
+//             list[x1][cot].visible !== false ||
+//             list[x2][cot].visible !== false
+//           ) {
+//             break;
+//           }
+//           flag = true;
+//           for (let t = y1 + 1; t < cot; t++) {
+//             if (list[x1][t].visible !== false) {
+//               flag = false;
+//               break;
+//             }
+//           }
+//           if (flag) {
+//             for (let t = y2 + 1; t < cot; t++) {
+//               if (list[x2][t].visible !== false) {
+//                 flag = false;
+//                 break;
+//               }
+//             }
+//             if (flag) {
+//               for (let hang = xMin + 1; hang < xMax; hang++) {
+//                 if (list[hang][cot].visible !== false) {
+//                   flag = false;
+//                   break;
+//                 }
+//               }
+//               if (flag) return true;
+//             }
+//           }
+//         }
+//       }
+//       if (y1 < y2) {
+//         // an trai
+//         if (list[x2][y2 - 1].visible === false) {
+//           for (let cot = y1 + 1; cot < y2; cot++) {
+//             if (list[x1][cot].visible !== false) {
+//               break;
+//             }
+//             for (let t = y2 - 1; t >= cot; t--) {
+//               if (list[x2][t].visible !== false) {
+//                 break;
+//               }
+//               if (cot === t) {
+//                 flag = true;
+//                 for (let hang = xMin + 1; hang < xMax; hang++) {
+//                   if (list[hang][cot].visible !== false) {
+//                     flag = false;
+//                     break;
+//                   }
+//                 }
+//                 if (flag) return true;
+//               }
+//             }
+//           }
+//         }
+//         // an tren/ duoi
+//         if (
+//           (x1 > x2 && list[x2 + 1][y2].visible === false) ||
+//           (x1 < x2 && list[x2 - 1][y2].visible === false)
+//         ) {
+//           if (list[x1][y2].visible === false) {
+//             flag = true;
+//             for (let t = xMin + 1; t < xMax; t++) {
+//               if (list[t][y2].visible !== false) {
+//                 flag = false;
+//                 break;
+//               }
+//             }
+//             if (flag) {
+//               for (let t = yMin + 1; t < yMax; t++) {
+//                 if (list[x1][t].visible !== false) {
+//                   flag = false;
+//                   break;
+//                 }
+//               }
+//               if (flag) return true;
+//               console.log("ok3");
+//             }
+//           }
+//         }
+//       }
+//     }
+//     // ben phai
+//     if (list[x1][y1 + 1].visible === false) {
+//       if (list[x2][y2 + 1].visible === false) {
+//         for (let cot = yMax + 1; cot < list[0].length; cot++) {
+//           if (
+//             list[x1][cot].visible !== false ||
+//             list[x2][cot].visible !== false
+//           ) {
+//             break;
+//           }
+//           flag = true;
+//           for (let t = y1 + 1; t < cot; t++) {
+//             if (list[x1][t].visible !== false) {
+//               flag = false;
+//               break;
+//             }
+//           }
+//           if (flag) {
+//             for (let t = y2 + 1; t < cot; t++) {
+//               if (list[x2][t].visible !== false) {
+//                 flag = false;
+//                 break;
+//               }
+//             }
+//             if (flag) {
+//               for (let hang = xMin + 1; hang < xMax; hang++) {
+//                 if (list[hang][cot].visible !== false) {
+//                   flag = false;
+//                   break;
+//                 }
+//               }
+//               if (flag) return true;
+//             }
+//           }
+//         }
+//       }
+//       if (y1 < y2) {
+//         // an trai
+//         if (list[x2][y2 - 1].visible === false) {
+//           for (let cot = y1 + 1; cot < y2; cot++) {
+//             if (list[x1][cot].visible !== false) {
+//               break;
+//             }
+//             for (let t = y2 - 1; t >= cot; t--) {
+//               if (list[x2][t].visible !== false) {
+//                 break;
+//               }
+//               if (cot === t) {
+//                 flag = true;
+//                 for (let hang = xMin + 1; hang < xMax; hang++) {
+//                   if (list[hang][cot].visible !== false) {
+//                     flag = false;
+//                     break;
+//                   }
+//                 }
+//                 if (flag) return true;
+//               }
+//             }
+//           }
+//         }
+//         // an tren / duoi
+//         //an tren/duoi:
+//         if (
+//           (x1 > x2 && list[x2 + 1][y2].visible === false) ||
+//           (x1 < x2 && list[x2 - 1][y2].visible === false)
+//         ) {
+//           if (list[x1][y2].visible === false) {
+//             flag = true;
+//             for (let t = xMin + 1; t < xMax; t++) {
+//               if (list[t][y2].visible !== false) {
+//                 flag = false;
+//                 break;
+//               }
+//             }
+//             if (flag) {
+//               for (let t = yMin + 1; t < yMax; t++) {
+//                 if (list[x1][t].visible !== false) {
+//                   flag = false;
+//                   break;
+//                 }
+//               }
+//               if (flag) return true;
+//               console.log("ok4");
+//             }
+//           }
+//         }
+//       }
+//     }
+//     return false;
+//   }
+// }
+
 function checkAll(list, firstItem, secondItem) {
   if (firstItem.x === secondItem.x && firstItem.y === secondItem.y) {
     return false;
   }
   if (firstItem.x === secondItem.x) {
-    return checkLineX(list, firstItem, secondItem);
+    return (
+      checkLineX(list, firstItem, secondItem) ||
+      checkLineX_Tr_Du(list, firstItem, secondItem)
+    );
   }
   if (firstItem.y === secondItem.y) {
-    return checkLineY(list, firstItem, secondItem);
+    return (
+      checkLineY(list, firstItem, secondItem) ||
+      checkLineY_Tr_Du(list, firstItem, secondItem)
+    );
   }
-
   return (
     checkRectX(list, firstItem, secondItem) ||
-    checkRectY(list, firstItem, secondItem)
-    // ||    checkMoreLineX(list, firstItem, secondItem)
+    checkRectY(list, firstItem, secondItem) ||
+    checkMoreLineX(list, firstItem, secondItem, -1) ||
+    checkMoreLineX(list, firstItem, secondItem, 1) ||
+    checkMoreLineY(list, firstItem, secondItem, -1) ||
+    checkMoreLineY(list, firstItem, secondItem, 1)
   );
 }
-
 // cot  ( chung x )
 function checkLineX(list, firstItem, secondItem) {
   let min = Math.min(firstItem.y, secondItem.y);
   let max = Math.max(firstItem.y, secondItem.y);
-
   for (let i = min + 1; i < max; i++) {
-    if (list[firstItem.x][i].visible === true) {
+    if (list[firstItem.x][i].visible !== false) {
       return false;
     }
   }
   return true;
+}
+// hang tren / duoi
+function checkLineX_Tr_Du(list, firstItem, secondItem) {
+  let min = Math.min(firstItem.y, secondItem.y);
+  let max = Math.max(firstItem.y, secondItem.y);
+  let flag;
+  let x1 = firstItem.x;
+  let y1 = firstItem.y;
+  let y2 = secondItem.y;
+  // check tren
+  for (let hang = x1 - 1; hang >= 0; hang--) {
+    if (list[hang][y1].visible !== false || list[hang][y2].visible !== false) {
+      break;
+    } else {
+      flag = true;
+      for (let y = min + 1; y <= max; y++) {
+        if (list[hang][y].visible !== false) flag = false;
+      }
+      if (flag) return true;
+    }
+  }
+  // check duoi
+  for (let hang = x1 + 1; hang <= list[1].length; hang++) {
+    if (list[hang][y1].visible !== false || list[hang][y2].visible !== false) {
+      break;
+    } else {
+      flag = true;
+      for (let i = min + 1; i < max; i++) {
+        if (list[hang][i].visible !== false) flag = false;
+      }
+      if (flag) return true;
+    }
+  }
+  return false;
 }
 
 // hang  ( chung y )
 function checkLineY(list, firstItem, secondItem) {
   let min = Math.min(firstItem.x, secondItem.x);
   let max = Math.max(firstItem.x, secondItem.x);
-
   for (let i = min + 1; i < max; i++) {
-    if (list[i][secondItem.y].visible === true) {
+    if (list[i][secondItem.y].visible !== false) {
       return false;
     }
   }
   return true;
 }
-
-// ăn theo chữ z
-function checkRectX(list, firstItem, secondItem) {
-  let pMinY = firstItem;
-  let pMaxY = secondItem;
-  if (firstItem.y > secondItem.y) {
-    pMinY = secondItem;
-    pMaxY = firstItem;
+// cot  trai / phai
+function checkLineY_Tr_Du(list, firstItem, secondItem) {
+  let min = Math.min(firstItem.x, secondItem.x);
+  let max = Math.max(firstItem.x, secondItem.x);
+  let flag;
+  let x1 = firstItem.x;
+  let y1 = firstItem.y;
+  let x2 = secondItem.x;
+  // check trai
+  for (let cot = y1 - 1; cot >= 0; cot--) {
+    if (list[x1][cot].visible !== false || list[x2][cot].visible !== false) {
+      break;
+    } else {
+      flag = true;
+      for (let i = min + 1; i < max; i++) {
+        if (list[i][cot].visible !== false) {
+          flag = false;
+        }
+      }
+      if (flag) {
+        return true;
+      }
+    }
   }
-
-  for (let y = pMinY.y + 1; y < pMaxY.y; y++) {
-    if (list[pMinY.x][y].visible !== false) {
-      return false;
+  // check phai
+  for (let cot = y1 + 1; cot < list[0].length; cot++) {
+    if (list[x1][cot].visible !== false || list[x2][cot].visible !== false) {
+      break;
+    } else {
+      flag = true;
+      for (let i = min + 1; i < max; i++) {
+        if (list[i][cot].visible !== false) {
+          flag = false;
+          break;
+        }
+      }
+      if (flag) return true;
     }
-    if (
-      list[pMaxY.x][y].visible === false &&
-      checkLineY(list, firstItem, secondItem) &&
-      checkLineX(list, firstItem, secondItem)
-    ) {
-    }
-    // if (
-    //   checkLineX(list, firstItem, secondItem) &&
-    //   checkLineY(list, firstItem, secondItem) &&
-    //   checkLineX(list, firstItem, secondItem)
-    // ) {
-    //   return true;
-    // }
   }
   return false;
 }
+
+// ăn theo chữ z
+function checkRectX(list, firstItem, secondItem) {
+  console.log({ list }, { firstItem }, { secondItem });
+  // console.log("ok1");
+  // let pMinY = firstItem;
+  // let pMaxY = secondItem;
+  // if (firstItem.y > secondItem.y) {
+  //   pMinY = secondItem;
+  //   pMaxY = firstItem;
+  // }
+  // for (let y = pMinY.y + 1; y < pMaxY; y++) {
+  //   if (
+  //     checkLineX(list, firstItem, secondItem) &&
+  //     checkLineY(list, firstItem, secondItem) &&
+  //     checkLineX(list, firstItem, secondItem)
+  //   ) {
+  //     return true;
+  //   }
+  // }
+  // return false;
+  // for (let y = pMinY.y; y <= pMaxY.y; y++) {
+  //   if (y > pMinY.y && list[pMinY.x][y].visible !== false) {
+  //     return false;
+  //   }
+  //   const test = list[pMaxY.x][y].visible;
+  //   console.log({ test });
+  //   if (
+  //     list[pMaxY.x][y].visible === false &&
+  //     checkLineY(list, firstItem, secondItem) &&
+  //     checkLineX(list, firstItem, secondItem)
+  //   ) {
+  //     return true;
+  //   }
+  // }
+  // return false;
+}
 // ăn theo chữ z
 function checkRectY(list, firstItem, secondItem) {
-  let pMinX = firstItem;
-  let pMaxX = secondItem;
-  if (firstItem.x > secondItem.x) {
-    pMinX = secondItem;
-    pMaxX = firstItem;
-  }
-  for (let x = pMinX.x + 1; x < pMaxX.x; x++) {
-    if (list[x][pMinX.y].visible !== false) {
-      return false;
-    }
-    if (
-      // checkLineY(list, firstItem, secondItem)
-      list[x][pMaxX.y].visible === false &&
-      checkLineX(list, firstItem, secondItem) &&
-      checkLineY(list, firstItem, secondItem)
-    ) {
-    }
-  }
-  // if (!(firstItem.item.id === secondItem.item.id)) {
-  //   return false;
+  console.log({ list }, { firstItem }, { secondItem });
+
+  // console.log("ok2");
+  // let pMinX = firstItem;
+  // let pMaxX = secondItem;
+  // if (firstItem.x > secondItem.x) {
+  //   pMinX = secondItem;
+  //   pMaxX = firstItem;
   // }
-  // for (let x = pMinX.x + 1; x < pMaxX.x; x++) {
+  // for (let x = pMinX.x + 1; x < pMaxX; x++) {
   //   if (
   //     checkLineY(list, firstItem, secondItem) &&
   //     checkLineX(list, firstItem, secondItem) &&
@@ -204,58 +859,75 @@ function checkRectY(list, firstItem, secondItem) {
   //     return true;
   //   }
   // }
-  return false;
+  // return false;
+  // for (let x = pMinX.x; x <= pMaxX.x; x++) {
+  //   if (x > pMinX.x && list[x][pMinX.y].visible !== false) {
+  //     return false;
+  //   }
+  //   if (
+  //     list[x][pMaxX.y].visible === false &&
+  //     checkLineX(list, firstItem, secondItem) &&
+  //     checkLineY(list, firstItem, secondItem)
+  //   ) {
+  //     return true;
+  //   }
+  // }
+  // return false;
 }
-// function checkMoreLineX(list, firstItem, secondItem) {
-//   let pMinY = firstItem;
-//   let pMaxY = secondItem;
-//   console.log({ pMinY }, { pMaxY });
-//   if (firstItem.y > secondItem.y) {
-//     pMinY = secondItem;
-//     pMaxY = firstItem;
-//   }
-//   let y = pMaxY.y;
-//   let row = pMinY.x;
-//   // if (type === -1) {
-//   //   y = pMinY.y;
-//   //   row = pMaxY.x;
-//   // }
-//   if (checkLineX(list, pMinY.y, pMaxY.y, row, firstItem, secondItem)) {
-//     while (list[pMinY.x][y].visible && list[pMaxY.x][y].visible) {
-//       if (checkLineY(list, pMinY.x, pMaxY.x, y, firstItem, secondItem)) {
-//         return true;
-//       }
-//       // y += type;
-//       if (!list[pMinY.x][y]) {
-//         return true;
-//       }
-//     }
-//   }
-//   return false;
-// }
 
-// function checkTwoPoint(list, firstItem, item) {
-//   //check line with x
-//   if (firstItem.x === item.x) {
-//     if (checkLineX(list, firstItem.y, item.y, item.x, firstItem, item)) {
-//       return true;
-//     }
-//   }
-//   //check line with y
-//   if (firstItem.y === item.y) {
-//     if (checkLineY(list, firstItem.x, item.x, item.y, firstItem, item)) {
-//       return true;
-//     }
-//   }
-//   let type = -1;
-//   if ((type = checkRectX(list, firstItem, item) !== -1)) {
-//     return true;
-//   }
-//   if ((type = checkRectY(list, firstItem, item) !== -1)) {
-//     return true;
-//   }
-//   if ((type = checkMoreLineX(list, firstItem, item, 1)) !== 1) {
-//     return true;
-//   }
-// }
+function checkMoreLineX(list, firstItem, secondItem, type) {
+  console.log({ list }, { firstItem }, { secondItem }, { type });
+  // let pMinY = firstItem;
+  // let pMaxY = secondItem;
+  // if (firstItem.y > secondItem.y) {
+  //   pMinY = secondItem;
+  //   pMaxY = firstItem;
+  // }
+  // let y = pMaxY.y;
+  // let row = pMinY.x;
+  // if (type === -1) {
+  //   y = pMinY.y;
+  //   row = pMaxY.x;
+  // }
+  // if (checkLineX(list, firstItem, secondItem)) {
+  //   while (
+  //     list[pMinY.x][y].visible === false &&
+  //     list[pMaxY.x][y].visible === false
+  //   ) {
+  //     if (checkLineY(list, firstItem, secondItem)) {
+  //       return true;
+  //     }
+  //     y += type;
+  //   }
+  // }
+  // return false;
+}
+
+function checkMoreLineY(list, firstItem, secondItem, type) {
+  console.log({ list }, { firstItem }, { secondItem }, { type });
+  // let pMinX = firstItem;
+  // let pMaxX = secondItem;
+  // if (firstItem.x > secondItem.x) {
+  //   pMinX = secondItem;
+  //   pMaxX = firstItem;
+  // }
+  // let x = pMaxX.x;
+  // let col = pMinX.y;
+  // if (type === -1) {
+  //   x = pMinX.x;
+  //   col = pMaxX.y;
+  // }
+  // if (checkLineY(list, firstItem, secondItem)) {
+  //   while (
+  //     list[x][pMinX.y].visible === false &&
+  //     list[x][pMaxX.y].visible === false
+  //   ) {
+  //     if (checkLineX(list, firstItem, secondItem)) {
+  //       return true;
+  //     }
+  //     x += type;
+  //   }
+  // }
+  // return false;
+}
 export default StoreReducers;
