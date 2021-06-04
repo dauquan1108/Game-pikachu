@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
-import Ingredient from "../src/components/Ingredient";
+// import Ingredient from "../src/components/Ingredient";
+import Test from "../src/components/Test";
+
 class App extends Component {
   constructor() {
     super();
@@ -28,7 +30,7 @@ class App extends Component {
           </button>
         </div>
         <div className="Content">
-          <Ingredient />
+          {/* <Ingredient /> */} <Test />
         </div>
       </div>
     );

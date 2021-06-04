@@ -14,13 +14,15 @@ class ViewGame extends Component {
     this.setState({
       visible: !visible,
     });
-    const { item, x, y, onItemButtonClick } = this.props;
+    const { item, x, y, onItemButtonClick, text } = this.props;
+
     const itemClick = {
       x,
       y,
       item,
     };
     onItemButtonClick(itemClick);
+    text(itemClick);
   };
 
   render() {
