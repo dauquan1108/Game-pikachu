@@ -92,7 +92,6 @@ const setStateTwo = (initialStateTwo) => {
       initialStateTwo.push(array);
     }
   }
-  // console.log("DAYYYYYYYYYYYYYYY", initialStateTwo);
   return initialStateTwo;
 };
 
