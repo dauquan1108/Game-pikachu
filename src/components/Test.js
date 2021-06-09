@@ -390,7 +390,7 @@ const dataFake = [
     {
       id: 16,
       img: "a17",
-      visible: true,
+      visible: false,
     },
     {
       id: 3,
@@ -629,7 +629,91 @@ class Test extends Component {
       endArrayRandom: dataFake,
     };
   }
-  // Bọc đầu cuối của mảng bảng giá trị trống
+
+  checkAll = (firstItem, endItem) => {
+    console.log(firstItem, endItem);
+    const x1 = firstItem.x;
+    const y1 = firstItem.y;
+    const x2 = endItem.x;
+    const y2 = endItem.y;
+    if (x1 === x2 && y1 === y2) return false;
+    if (x1 === x2) return this.checkLineX(y1, y2, x1);
+    if (y1 === y2) return this.checkLineY(x1, x2, y1);
+    if (this.checkRectX(firstItem, endItem)) return true;
+    if (this.checkRectY(firstItem, endItem)) return true;
+    return false;
+  };
+  checkLineX = (y1, y2, x) => {
+    let min = Math.min(y1, y2);
+    let max = Math.max(y1, y2);
+    // run column
+    const { endArrayRandom } = this.state;
+    for (let y = min + 1; y < max; y++) {
+      if (endArrayRandom[y][x].visible) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  checkLineY = (x1, x2, y) => {
+    let min = Math.min(x1, x2);
+    let max = Math.max(x1, x2);
+    const { endArrayRandom } = this.state;
+    for (let x = min + 1; x < max; x++) {
+      if (endArrayRandom[y][x].visible) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  checkRectX = (p1, p2) => {
+    let pMinY = p1;
+    let pMaxY = p2;
+    if (p1.y > p2.y) {
+      pMinY = p2;
+      pMaxY = p1;
+    }
+    const { endArrayRandom } = this.state;
+    for (let y = pMinY.y; y <= pMaxY.y; y++) {
+      if (y > pMinY.y && endArrayRandom[y][pMinY.x].visible) {
+        return false;
+      }
+      if (
+        !endArrayRandom[y][pMaxY.x].visible &&
+        this.checkLineY(pMinY.x, pMaxY.x, y) &&
+        this.checkLineX(y, pMaxY.y, pMaxY.x)
+      ) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  checkRectY = (p1, p2) => {
+    let pMinX = p1;
+    let pMaxX = p2;
+    if (p1.x > p2.x) {
+      pMinX = p2;
+      pMaxX = p1;
+    }
+    const { endArrayRandom } = this.state;
+    for (let x = pMinX.x; x <= pMaxX.x; x++) {
+      if (x > pMinX.x && endArrayRandom[pMinX.y][x].visible) {
+        return false;
+      }
+      if (
+        !endArrayRandom[pMaxX.y][x].visible &&
+        this.checkLineX(pMinX.y, pMaxX.y, x) &&
+        this.checkLineY(x, pMaxX.x, pMaxX.y)
+      ) {
+        return true;
+      }
+    }
+    return false;
+  };
+
   newArrayRows = (initialState) => {
     for (let i = 0; i < cols; i++) {
       if (i === 0 || i === cols - 1) {
@@ -656,9 +740,7 @@ class Test extends Component {
     }
     return initialState;
   };
-  // end Bọc đầu cuối của mảng bảng giá trị trống trái /phải
 
-  // thêm gia mảng rỗng ở đầu và cuối mảng trên / dưới
   newArrayNullCols = () => {
     let wrapArray = [];
 
@@ -671,7 +753,6 @@ class Test extends Component {
     }
     return wrapArray;
   };
-  //end thêm gia mảng rỗng ở đầu và cuối mảng trên / dưới
 
   initData = (initialStateTwo) => {
     for (let x = 0; x < rows; x++) {
@@ -701,102 +782,26 @@ class Test extends Component {
     this.setState({ endArrayRandom });
   };
 
-  checkAll = (firstItem, endItem) => {
-    const x1 = firstItem.x;
-    const y1 = firstItem.y;
-    const x2 = endItem.x;
-    const y2 = endItem.y;
-    if (x1 === x2 && y1 === y2) return false;
-    if (x1 === x2) return this.checkLineX(x1, x2, y1);
-    if (y1 === y2) return this.checkLineY(y1, y2, x1);
-    if (this.checkRectX(x1, y1, x2, y2)) return true;
-    if (this.checkRectX(x1, y1, x2, y2)) return true;
-    return false;
-  };
-
-  checkRectX = (x1, y1, x2, y2) => {
-    var yMax, yMin, xMax, xMin;
-    yMax = Math.max(y1, y2);
-    yMin = Math.min(y1, y2);
-
-    xMax = yMax === y1 ? x1 : x2;
-    xMin = yMin === y1 ? x1 : x2;
-    if (x1 !== x2) {
-      for (var i = yMin + 1; i < yMax; i++) {
-        if (
-          this.checkLineX(yMin, i + 1, xMin) &&
-          this.checkLineY(xMin, xMax, i) &&
-          this.checkLineX(i - 1, yMax, xMax)
-        ) {
-          return i;
-        }
-      }
-      return true;
-    } else return true;
-  };
-
-  checkRectY = (x1, y1, x2, y2) => {
-    var yMax, yMin, xMax, xMin;
-
-    xMax = Math.max(x1, x2);
-    xMin = Math.min(x1, x2);
-
-    yMax = xMax === x1 ? y1 : y2;
-    yMin = xMin === x1 ? y1 : y2;
-
-    if (y1 !== y2) {
-      for (var i = xMin + 1; i < xMax; i++) {
-        if (
-          this.checkLineY(xMin, i + 1, yMin) &&
-          this.checkLineX(yMin, yMax, i) &&
-          this.checkLineY(i - 1, xMax, yMax)
-        ) {
-          return i;
-        }
-      }
-      return true;
-    } else return true;
-  };
-
-  checkLineX = (y1, y2, x) => {
-    const { endArrayRandom } = this.state;
-    let min = Math.min(y1, y2);
-    let max = Math.max(y1, y2);
-    for (let y = min + 1; y < max; y++) {
-      if (endArrayRandom[y][x].visible) return false;
-    }
-    return true;
-  };
-
-  checkLineY = (x1, x2, y) => {
-    const { endArrayRandom } = this.state;
-    let min = Math.min(x1, x2);
-    let max = Math.max(x1, x2);
-    for (let x = min + 1; x < max; x++) {
-      if (endArrayRandom[y][x].visible) return false;
-    }
-    return true;
-  };
-
   //render các col trong row
   renderItemCols = (e, y) => {
     return e.map((item, x) => (
       <div
         key={x}
         style={{
+          cursor: "pointer",
           width: "7.14286%",
           border: "4px solid black",
           textAlign: "center",
           margin: "0 auto",
           paddingTop: "10px",
-          background: item.visible ? "blue" : "red",
+          background: item.visible ? "#6598eb" : "#c9a061",
         }}
+        onClick={() => this.onChangeStatusItem(x, y, item)}
       >
         <div
           style={{
             display: item.visible ? "unset" : "none",
           }}
-          onClick={() => this.onChangeStatusItem(x, y, item)}
         >
           <p>{item.id}</p>
         </div>
@@ -810,7 +815,7 @@ class Test extends Component {
     return endArrayRandom.map((e, y) => (
       <div
         style={{
-          height: "50px",
+          height: "80px",
           border: "2px",
           display: "flex",
         }}
@@ -822,7 +827,7 @@ class Test extends Component {
   };
 
   render() {
-    return <div style={{ width: "500px" }}>{this.renderItemRows()}</div>;
+    return <div style={{ width: "1000px" }}>{this.renderItemRows()}</div>;
   }
 }
 export default Test;
