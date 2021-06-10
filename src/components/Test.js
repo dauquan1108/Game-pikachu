@@ -132,7 +132,7 @@ const dataFake = [
       visible: true,
     },
     {
-      id: 13,
+      id: 1,
       img: "a14",
       visible: true,
     },
@@ -147,7 +147,7 @@ const dataFake = [
       visible: true,
     },
     {
-      id: 7,
+      id: 1,
       img: "a8",
       visible: true,
     },
@@ -174,12 +174,12 @@ const dataFake = [
     {
       id: 5,
       img: "a6",
-      visible: true,
+      visible: false,
     },
     {
       id: 17,
       img: "a18",
-      visible: true,
+      visible: false,
     },
     {
       id: -1,
@@ -249,7 +249,7 @@ const dataFake = [
       visible: true,
     },
     {
-      id: 6,
+      id: 7,
       img: "a7",
       visible: true,
     },
@@ -321,7 +321,7 @@ const dataFake = [
       visible: true,
     },
     {
-      id: 17,
+      id: 6,
       img: "a18",
       visible: true,
     },
@@ -641,7 +641,12 @@ class Test extends Component {
     if (y1 === y2) return this.checkLineY(x1, x2, y1);
     if (this.checkRectX(firstItem, endItem)) return true;
     if (this.checkRectY(firstItem, endItem)) return true;
-    return false;
+    return (
+      this.checkMoreLineX(firstItem, endItem, -1) ||
+      this.checkMoreLineX(firstItem, endItem, 1) ||
+      this.checkMoreLineY(firstItem, endItem, -1) ||
+      this.checkMoreLineY(firstItem, endItem, 1)
+    );
   };
   checkLineX = (y1, y2, x) => {
     let min = Math.min(y1, y2);
@@ -713,6 +718,76 @@ class Test extends Component {
     }
     return false;
   };
+
+  checkMoreLineX(p1, p2, type) {
+    let pMinY = p1,
+      pMaxY = p2;
+    if (p1.x > p2.x) {
+      pMinY = p2;
+      pMaxY = p1;
+    }
+    let y = pMaxY.x + type;
+    let row = pMinY.y;
+    let colFinish = pMaxY.x;
+    if (type === -1) {
+      colFinish = pMinY.x;
+      y = pMinY.x + type;
+      row = pMaxY.y;
+    }
+    const { endArrayRandom } = this.state;
+    debugger;
+    if (
+      (endArrayRandom[colFinish][row].visible === false ||
+        pMinY.y === pMaxY.y) &&
+      this.checkLineY(pMinY.x, pMaxY.x, row)
+    ) {
+      debugger;
+      while (
+        endArrayRandom[pMinY.y][y].visible === false &&
+        endArrayRandom[pMaxY.y][y].visible === false
+      ) {
+        if (this.checkLineX(pMinY.y, pMaxY.y, y)) {
+          return true;
+        }
+        y += type;
+      }
+    }
+    return false;
+  }
+  checkMoreLineY(p1, p2, type) {
+    let pMinX = p1,
+      pMaxX = p2;
+    if (p1.x > p2.x) {
+      pMinX = p2;
+      pMaxX = p1;
+    }
+    let x = pMaxX.x + type;
+    let col = pMinX.y;
+    let rowFinish = pMaxX.x;
+    if (type === -1) {
+      rowFinish = pMinX.x;
+      x = pMinX.x + type;
+      col = pMaxX.y;
+    }
+    const { endArrayRandom } = this.state;
+    debugger;
+    if (
+      (endArrayRandom[col][rowFinish] === false || pMinX.x === pMaxX.x) &&
+      this.checkLineY(pMinX.x, pMaxX.x, col)
+    ) {
+      debugger;
+      while (
+        endArrayRandom[pMinX.y][x].visible === false &&
+        endArrayRandom[pMaxX.y][x].visible === false
+      ) {
+        if (this.checkLineX(pMinX.y, pMaxX.y, x)) {
+          return true;
+        }
+        x += type;
+      }
+    }
+    return false;
+  }
 
   newArrayRows = (initialState) => {
     for (let i = 0; i < cols; i++) {
