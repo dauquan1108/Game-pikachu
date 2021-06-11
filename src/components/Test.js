@@ -1,5 +1,5 @@
 import { Component } from "react";
-// import "./style.css";
+import "./Test.css";
 import a1 from "../images/pokemon_1.png";
 import a2 from "../images/pokemon_2.png";
 import a3 from "../images/pokemon_3.png";
@@ -42,584 +42,584 @@ const gameView = [
   { id: 17, img: a18, check: 0 },
 ];
 
-const dataFake = [
-  [
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-  ],
-  [
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: 1,
-      img: "a9",
-      visible: true,
-    },
-    {
-      id: 6,
-      img: "a11",
-      visible: true,
-    },
-    {
-      id: 1,
-      img: "a14",
-      visible: true,
-    },
-    {
-      id: 2,
-      img: "a3",
-      visible: true,
-    },
-    {
-      id: 8,
-      img: "a9",
-      visible: true,
-    },
-    {
-      id: 1,
-      img: "a8",
-      visible: true,
-    },
-    {
-      id: 13,
-      img: "a14",
-      visible: true,
-    },
-    {
-      id: 1,
-      img: "a2",
-      visible: true,
-    },
-    {
-      id: 16,
-      img: "a14",
-      visible: true,
-    },
-    {
-      id: 6,
-      img: "a7",
-      visible: true,
-    },
-    {
-      id: 5,
-      img: "a6",
-      visible: false,
-    },
-    {
-      id: 17,
-      img: "a18",
-      visible: false,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-  ],
-  [
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: 1,
-      img: "a2",
-      visible: false,
-    },
-    {
-      id: 1,
-      img: "a4",
-      visible: true,
-    },
-    {
-      id: 1,
-      img: "a3",
-      visible: false,
-    },
-    {
-      id: 6,
-      img: "a7",
-      visible: true,
-    },
-    {
-      id: 7,
-      img: "a8",
-      visible: true,
-    },
-    {
-      id: 8,
-      img: "a9",
-      visible: true,
-    },
-    {
-      id: 16,
-      img: "a17",
-      visible: true,
-    },
-    {
-      id: 12,
-      img: "a13",
-      visible: true,
-    },
-    {
-      id: 9,
-      img: "a18",
-      visible: true,
-    },
-    {
-      id: 4,
-      img: "a5",
-      visible: true,
-    },
-    {
-      id: 1,
-      img: "a2",
-      visible: true,
-    },
-    {
-      id: 7,
-      img: "a7",
-      visible: true,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-  ],
-  [
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: 14,
-      img: "a12",
-      visible: true,
-    },
-    {
-      id: 2,
-      img: "a3",
-      visible: true,
-    },
-    {
-      id: 17,
-      img: "a18",
-      visible: true,
-    },
-    {
-      id: 12,
-      img: "a13",
-      visible: true,
-    },
-    {
-      id: 13,
-      img: "a14",
-      visible: true,
-    },
-    {
-      id: 7,
-      img: "a8",
-      visible: true,
-    },
-    {
-      id: 0,
-      img: "a1",
-      visible: true,
-    },
-    {
-      id: 11,
-      img: "a12",
-      visible: true,
-    },
-    {
-      id: 4,
-      img: "a5",
-      visible: true,
-    },
-    {
-      id: 4,
-      img: "a5",
-      visible: false,
-    },
-    {
-      id: 16,
-      img: "a10",
-      visible: true,
-    },
-    {
-      id: 6,
-      img: "a18",
-      visible: true,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-  ],
-  [
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: 4,
-      img: "a5",
-      visible: true,
-    },
-    {
-      id: 16,
-      img: "a17",
-      visible: true,
-    },
-    {
-      id: 6,
-      img: "a7",
-      visible: true,
-    },
-    {
-      id: 1,
-      img: "a2",
-      visible: true,
-    },
-    {
-      id: 5,
-      img: "a6",
-      visible: true,
-    },
-    {
-      id: 8,
-      img: "a9",
-      visible: true,
-    },
-    {
-      id: 15,
-      img: "a16",
-      visible: true,
-    },
-    {
-      id: 14,
-      img: "a15",
-      visible: true,
-    },
-    {
-      id: 0,
-      img: "a1",
-      visible: true,
-    },
-    {
-      id: 4,
-      img: "a4",
-      visible: true,
-    },
-    {
-      id: 16,
-      img: "a17",
-      visible: false,
-    },
-    {
-      id: 3,
-      img: "a4",
-      visible: true,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-  ],
-  [
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: 15,
-      img: "a16",
-      visible: true,
-    },
-    {
-      id: 11,
-      img: "a12",
-      visible: true,
-    },
-    {
-      id: 15,
-      img: "a16",
-      visible: true,
-    },
-    {
-      id: 11,
-      img: "a12",
-      visible: true,
-    },
-    {
-      id: 2,
-      img: "a3",
-      visible: true,
-    },
-    {
-      id: 10,
-      img: "a11",
-      visible: true,
-    },
-    {
-      id: 7,
-      img: "a8",
-      visible: true,
-    },
-    {
-      id: 10,
-      img: "a11",
-      visible: true,
-    },
-    {
-      id: 9,
-      img: "a10",
-      visible: true,
-    },
-    {
-      id: 6,
-      img: "a16",
-      visible: true,
-    },
-    {
-      id: 9,
-      img: "a10",
-      visible: true,
-    },
-    {
-      id: 7,
-      img: "a11",
-      visible: true,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-  ],
-  [
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: 14,
-      img: "a15",
-      visible: true,
-    },
-    {
-      id: 5,
-      img: "a6",
-      visible: true,
-    },
-    {
-      id: 0,
-      img: "a1",
-      visible: true,
-    },
-    {
-      id: 0,
-      img: "a1",
-      visible: true,
-    },
-    {
-      id: 5,
-      img: "a6",
-      visible: true,
-    },
-    {
-      id: 12,
-      img: "a13",
-      visible: true,
-    },
-    {
-      id: 9,
-      img: "a10",
-      visible: true,
-    },
-    {
-      id: 12,
-      img: "a13",
-      visible: true,
-    },
-    {
-      id: 16,
-      img: "a17",
-      visible: true,
-    },
-    {
-      id: 3,
-      img: "a4",
-      visible: true,
-    },
-    {
-      id: 14,
-      img: "a15",
-      visible: true,
-    },
-    {
-      id: 14,
-      img: "a15",
-      visible: true,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-  ],
-  [
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-    {
-      id: -1,
-      img: null,
-      visible: false,
-    },
-  ],
-];
+// const dataFake = [
+//   [
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//   ],
+//   [
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: 1,
+//       img: "a9",
+//       visible: true,
+//     },
+//     {
+//       id: 6,
+//       img: "a11",
+//       visible: true,
+//     },
+//     {
+//       id: 1,
+//       img: "a14",
+//       visible: true,
+//     },
+//     {
+//       id: 2,
+//       img: "a3",
+//       visible: true,
+//     },
+//     {
+//       id: 8,
+//       img: "a9",
+//       visible: true,
+//     },
+//     {
+//       id: 1,
+//       img: "a8",
+//       visible: true,
+//     },
+//     {
+//       id: 13,
+//       img: "a14",
+//       visible: true,
+//     },
+//     {
+//       id: 1,
+//       img: "a2",
+//       visible: true,
+//     },
+//     {
+//       id: 16,
+//       img: "a14",
+//       visible: true,
+//     },
+//     {
+//       id: 6,
+//       img: "a7",
+//       visible: true,
+//     },
+//     {
+//       id: 5,
+//       img: "a6",
+//       visible: false,
+//     },
+//     {
+//       id: 17,
+//       img: "a18",
+//       visible: false,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//   ],
+//   [
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: 1,
+//       img: "a2",
+//       visible: false,
+//     },
+//     {
+//       id: 1,
+//       img: "a4",
+//       visible: true,
+//     },
+//     {
+//       id: 1,
+//       img: "a3",
+//       visible: false,
+//     },
+//     {
+//       id: 6,
+//       img: "a7",
+//       visible: true,
+//     },
+//     {
+//       id: 7,
+//       img: "a8",
+//       visible: true,
+//     },
+//     {
+//       id: 8,
+//       img: "a9",
+//       visible: true,
+//     },
+//     {
+//       id: 16,
+//       img: "a17",
+//       visible: true,
+//     },
+//     {
+//       id: 12,
+//       img: "a13",
+//       visible: true,
+//     },
+//     {
+//       id: 9,
+//       img: "a18",
+//       visible: true,
+//     },
+//     {
+//       id: 4,
+//       img: "a5",
+//       visible: true,
+//     },
+//     {
+//       id: 1,
+//       img: "a2",
+//       visible: true,
+//     },
+//     {
+//       id: 7,
+//       img: "a7",
+//       visible: true,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//   ],
+//   [
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: 14,
+//       img: "a12",
+//       visible: true,
+//     },
+//     {
+//       id: 2,
+//       img: "a3",
+//       visible: true,
+//     },
+//     {
+//       id: 17,
+//       img: "a18",
+//       visible: true,
+//     },
+//     {
+//       id: 12,
+//       img: "a13",
+//       visible: true,
+//     },
+//     {
+//       id: 13,
+//       img: "a14",
+//       visible: true,
+//     },
+//     {
+//       id: 7,
+//       img: "a8",
+//       visible: true,
+//     },
+//     {
+//       id: 0,
+//       img: "a1",
+//       visible: true,
+//     },
+//     {
+//       id: 11,
+//       img: "a12",
+//       visible: true,
+//     },
+//     {
+//       id: 4,
+//       img: "a5",
+//       visible: true,
+//     },
+//     {
+//       id: 4,
+//       img: "a5",
+//       visible: false,
+//     },
+//     {
+//       id: 16,
+//       img: "a10",
+//       visible: true,
+//     },
+//     {
+//       id: 6,
+//       img: "a18",
+//       visible: true,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//   ],
+//   [
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: 4,
+//       img: "a5",
+//       visible: true,
+//     },
+//     {
+//       id: 16,
+//       img: "a17",
+//       visible: true,
+//     },
+//     {
+//       id: 6,
+//       img: "a7",
+//       visible: true,
+//     },
+//     {
+//       id: 1,
+//       img: "a2",
+//       visible: true,
+//     },
+//     {
+//       id: 5,
+//       img: "a6",
+//       visible: true,
+//     },
+//     {
+//       id: 8,
+//       img: "a9",
+//       visible: true,
+//     },
+//     {
+//       id: 15,
+//       img: "a16",
+//       visible: true,
+//     },
+//     {
+//       id: 14,
+//       img: "a15",
+//       visible: true,
+//     },
+//     {
+//       id: 0,
+//       img: "a1",
+//       visible: true,
+//     },
+//     {
+//       id: 4,
+//       img: "a4",
+//       visible: true,
+//     },
+//     {
+//       id: 16,
+//       img: "a17",
+//       visible: false,
+//     },
+//     {
+//       id: 3,
+//       img: "a4",
+//       visible: true,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//   ],
+//   [
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: 15,
+//       img: "a16",
+//       visible: true,
+//     },
+//     {
+//       id: 11,
+//       img: "a12",
+//       visible: true,
+//     },
+//     {
+//       id: 15,
+//       img: "a16",
+//       visible: true,
+//     },
+//     {
+//       id: 11,
+//       img: "a12",
+//       visible: true,
+//     },
+//     {
+//       id: 2,
+//       img: "a3",
+//       visible: true,
+//     },
+//     {
+//       id: 10,
+//       img: "a11",
+//       visible: true,
+//     },
+//     {
+//       id: 7,
+//       img: "a8",
+//       visible: true,
+//     },
+//     {
+//       id: 10,
+//       img: "a11",
+//       visible: true,
+//     },
+//     {
+//       id: 9,
+//       img: "a10",
+//       visible: true,
+//     },
+//     {
+//       id: 6,
+//       img: "a16",
+//       visible: true,
+//     },
+//     {
+//       id: 9,
+//       img: "a10",
+//       visible: true,
+//     },
+//     {
+//       id: 7,
+//       img: "a11",
+//       visible: true,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//   ],
+//   [
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: 14,
+//       img: "a15",
+//       visible: true,
+//     },
+//     {
+//       id: 5,
+//       img: "a6",
+//       visible: true,
+//     },
+//     {
+//       id: 0,
+//       img: "a1",
+//       visible: true,
+//     },
+//     {
+//       id: 0,
+//       img: "a1",
+//       visible: true,
+//     },
+//     {
+//       id: 5,
+//       img: "a6",
+//       visible: true,
+//     },
+//     {
+//       id: 12,
+//       img: "a13",
+//       visible: true,
+//     },
+//     {
+//       id: 9,
+//       img: "a10",
+//       visible: true,
+//     },
+//     {
+//       id: 12,
+//       img: "a13",
+//       visible: true,
+//     },
+//     {
+//       id: 16,
+//       img: "a17",
+//       visible: true,
+//     },
+//     {
+//       id: 3,
+//       img: "a4",
+//       visible: true,
+//     },
+//     {
+//       id: 14,
+//       img: "a15",
+//       visible: true,
+//     },
+//     {
+//       id: 14,
+//       img: "a15",
+//       visible: true,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//   ],
+//   [
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//     {
+//       id: -1,
+//       img: null,
+//       visible: false,
+//     },
+//   ],
+// ];
 class Test extends Component {
   constructor(props) {
     super(props);
@@ -946,9 +946,6 @@ class Test extends Component {
           cursor: "pointer",
           width: "7.14286%",
           border: "4px solid black",
-          textAlign: "center",
-          margin: "0 auto",
-          paddingTop: "10px",
           background: item.visible ? "#6598eb" : "#c9a061",
         }}
         onClick={() => this.onChangeStatusItem(x, y, item)}
@@ -958,7 +955,7 @@ class Test extends Component {
             display: item.visible ? "unset" : "none",
           }}
         >
-          <p>{item.id}</p>
+          <img className="Img" src={item.img} alt="icon-pokemon" />
         </div>
       </div>
     ));

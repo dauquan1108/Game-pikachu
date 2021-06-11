@@ -45,8 +45,9 @@
 }
 
 .Content {
-    /* con2 */
-    padding-left: 18%;
+    width: 50%;
+    height: 50%;
+    margin: 0 auto;
 }
 
 @media only screen and (min-width: 740px) and (max-width: 1023px) {
@@ -72,8 +73,8 @@
         padding-top: 5%;
         padding-left: 50px;
     }
- }
- 
+}
+
 @media only screen and (max-width: 739px) {
     .App {
         background-color: #ffffff;
