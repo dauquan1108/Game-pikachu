@@ -1,5 +1,5 @@
 import { Component } from "react";
-import "./style.css";
+// import "./style.css";
 import a1 from "../images/pokemon_1.png";
 import a2 from "../images/pokemon_2.png";
 import a3 from "../images/pokemon_3.png";
@@ -22,24 +22,24 @@ const rows = 8;
 const cols = 14;
 const limit = 4;
 const gameView = [
-  { id: 0, img: "a1", check: 0 },
-  { id: 1, img: "a2", check: 0 },
-  { id: 2, img: "a3", check: 0 },
-  { id: 3, img: "a4", check: 0 },
-  { id: 4, img: "a5", check: 0 },
-  { id: 5, img: "a6", check: 0 },
-  { id: 6, img: "a7", check: 0 },
-  { id: 7, img: "a8", check: 0 },
-  { id: 8, img: "a9", check: 0 },
-  { id: 9, img: "a10", check: 0 },
-  { id: 10, img: "a11", check: 0 },
-  { id: 11, img: "a12", check: 0 },
-  { id: 12, img: "a13", check: 0 },
-  { id: 13, img: "a14", check: 0 },
-  { id: 14, img: "a15", check: 0 },
-  { id: 15, img: "a16", check: 0 },
-  { id: 16, img: "a17", check: 0 },
-  { id: 17, img: "a18", check: 0 },
+  { id: 0, img: a1, check: 0 },
+  { id: 1, img: a2, check: 0 },
+  { id: 2, img: a3, check: 0 },
+  { id: 3, img: a4, check: 0 },
+  { id: 4, img: a5, check: 0 },
+  { id: 5, img: a6, check: 0 },
+  { id: 6, img: a7, check: 0 },
+  { id: 7, img: a8, check: 0 },
+  { id: 8, img: a9, check: 0 },
+  { id: 9, img: a10, check: 0 },
+  { id: 10, img: a11, check: 0 },
+  { id: 11, img: a12, check: 0 },
+  { id: 12, img: a13, check: 0 },
+  { id: 13, img: a14, check: 0 },
+  { id: 14, img: a15, check: 0 },
+  { id: 15, img: a16, check: 0 },
+  { id: 16, img: a17, check: 0 },
+  { id: 17, img: a18, check: 0 },
 ];
 
 const dataFake = [
@@ -127,7 +127,7 @@ const dataFake = [
       visible: true,
     },
     {
-      id: 10,
+      id: 6,
       img: "a11",
       visible: true,
     },
@@ -266,7 +266,7 @@ const dataFake = [
       visible: false,
     },
     {
-      id: 11,
+      id: 14,
       img: "a12",
       visible: true,
     },
@@ -465,7 +465,7 @@ const dataFake = [
       visible: true,
     },
     {
-      id: 11,
+      id: 7,
       img: "a11",
       visible: true,
     },
@@ -626,7 +626,7 @@ class Test extends Component {
     const temp = this.initData([]);
     this.state = {
       firstItem: null,
-      endArrayRandom: dataFake,
+      endArrayRandom: temp,
     };
   }
 
@@ -636,8 +636,14 @@ class Test extends Component {
     const x2 = endItem.x;
     const y2 = endItem.y;
     if (x1 === x2 && y1 === y2) return false;
-    if (x1 === x2) return this.checkLineX(y1, y2, x1);
-    if (y1 === y2) return this.checkLineY(x1, x2, y1);
+    if (x1 === x2)
+      return (
+        this.checkLineX(y1, y2, x1) || this.checkLineX_Tr_Ph(firstItem, endItem)
+      );
+    if (y1 === y2)
+      return (
+        this.checkLineY(x1, x2, y1) || this.checkLineY_Tr_Du(firstItem, endItem)
+      );
     if (this.checkRectX(firstItem, endItem)) return true;
     if (this.checkRectY(firstItem, endItem)) return true;
     return (
@@ -645,7 +651,6 @@ class Test extends Component {
       this.checkMoreLineX(firstItem, endItem, 1) ||
       this.checkMoreLineY(firstItem, endItem, -1) ||
       this.checkMoreLineY(firstItem, endItem, 1)
-      //  ||      this.checkTwoPoint(firstItem, endItem)
     );
   };
   checkLineX = (y1, y2, x) => {
@@ -660,6 +665,44 @@ class Test extends Component {
     }
     return true;
   };
+  checkLineX_Tr_Ph = (p1, p2) => {
+    let min = Math.min(p1.y, p2.y);
+    let max = Math.max(p1.y, p2.y);
+    const { endArrayRandom } = this.state;
+    // check trai
+    for (let col = p1.x - 1; col >= 0; col--) {
+      if (
+        endArrayRandom[p1.y][col].visible !== false ||
+        endArrayRandom[p2.y][col].visible !== false
+      ) {
+        break;
+      } else {
+        for (let y = min + 1; y <= max; y++) {
+          if (endArrayRandom[y][col].visible !== false) {
+            break;
+          }
+        }
+        return true;
+      }
+    }
+    // check Phai
+    for (let col = p1.x + 1; col <= cols; col++) {
+      if (
+        endArrayRandom[p1.y][col].visible !== false ||
+        endArrayRandom[p2.y][col].visible !== false
+      ) {
+        break;
+      } else {
+        for (let i = min + 1; i < max; i++) {
+          if (endArrayRandom[i][col].visible !== false) {
+            break;
+          }
+        }
+        return true;
+      }
+    }
+    return false;
+  };
 
   checkLineY = (x1, x2, y) => {
     let min = Math.min(x1, x2);
@@ -671,6 +714,44 @@ class Test extends Component {
       }
     }
     return true;
+  };
+  checkLineY_Tr_Du = (p1, p2) => {
+    let min = Math.min(p1.x, p2.x);
+    let max = Math.max(p1.x, p2.x);
+    const { endArrayRandom } = this.state;
+    // check tren
+    for (let row = p1.y - 1; row >= 0; row--) {
+      if (
+        endArrayRandom[row][p1.x].visible !== false ||
+        endArrayRandom[row][p2.x].visible !== false
+      ) {
+        break;
+      } else {
+        for (let i = min + 1; i < max; i++) {
+          if (endArrayRandom[row][i].visible !== false) {
+            break;
+          }
+        }
+        return true;
+      }
+    }
+    // check duoi
+    for (let row = p1.y + 1; row <= cols; row++) {
+      if (
+        endArrayRandom[row][p1.x].visible !== false ||
+        endArrayRandom[row][p2.x].visible !== false
+      ) {
+        break;
+      } else {
+        for (let i = min + 1; i < max; i++) {
+          if (endArrayRandom[row][i].visible !== false) {
+            break;
+          }
+        }
+        return true;
+      }
+    }
+    return false;
   };
 
   checkRectX = (p1, p2) => {
@@ -786,48 +867,6 @@ class Test extends Component {
       }
     }
     return false;
-  }
-  checkTwoPoint(p1, p2) {
-    const { endArrayRandom } = this.state;
-    if (endArrayRandom[p1.x][p1.y] === endArrayRandom[p2.x][p2.y]) {
-      // check line with x
-      if (p1.x === p2.x) {
-        if (this.checkLineX(p1.y, p2.y, p1.x)) {
-          return true;
-        }
-      }
-      // check line with y
-      if (p1.y === p2.y) {
-        if (this.checkLineY(p1.x, p2.x, p1.y)) {
-          return true;
-        }
-      }
-      // check in rectangle with x
-      if (this.checkRectX(p1, p2)) {
-        return true;
-      }
-      // check in rectangle with y
-      if (this.checkRectY(p1, p2)) {
-        return true;
-      }
-      // check more right
-      if (this.checkMoreLineX(p1, p2, 1)) {
-        return true;
-      }
-      // check more left
-      if (this.checkMoreLineX(p1, p2, -1)) {
-        return true;
-      }
-      // check more down
-      if (this.checkMoreLineY(p1, p2, 1)) {
-        return true;
-      }
-      // check more up
-      if (this.checkMoreLineY(p1, p2, -1)) {
-        return true;
-      }
-    }
-    return null;
   }
 
   newArrayRows = (initialState) => {
