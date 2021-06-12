@@ -1,4 +1,5 @@
 import { Component } from "react";
+import ItemTest from "./ItemTest";
 import "./Test.css";
 import a1 from "../images/pokemon_1.png";
 import a2 from "../images/pokemon_2.png";
@@ -625,6 +626,7 @@ class Test extends Component {
     super(props);
     const temp = this.initData([]);
     this.state = {
+      itemClick: true,
       firstItem: null,
       endArrayRandom: temp,
     };
@@ -771,7 +773,6 @@ class Test extends Component {
         this.checkLineY(pMinY.x, pMaxY.x, y) &&
         this.checkLineX(y, pMaxY.y, pMaxY.x)
       ) {
-        console.log("ok1");
         return true;
       }
     }
@@ -795,7 +796,6 @@ class Test extends Component {
         this.checkLineX(pMinX.y, pMaxX.y, x) &&
         this.checkLineY(x, pMaxX.x, pMaxX.y)
       ) {
-        console.log("ok2");
         return true;
       }
     }
@@ -921,33 +921,29 @@ class Test extends Component {
   };
 
   onChangeStatusItem = (x, y, item) => {
-    const { endArrayRandom, firstItem } = this.state;
+    const { endArrayRandom, firstItem, itemClick } = this.state;
     if (firstItem) {
       const endItem = { x, y, item };
       if (item.id === firstItem.item.id && this.checkAll(firstItem, endItem)) {
         endArrayRandom[y][x].visible = false;
         endArrayRandom[firstItem.y][firstItem.x].visible = false;
-        this.setState({ firstItem: null });
+        this.setState({ firstItem: null, itemClick: !itemClick });
       } else {
-        this.setState({ firstItem: null });
+        this.setState({ firstItem: null, itemClick: !itemClick });
       }
     } else {
-      this.setState({ firstItem: { x, y, item } });
+      this.setState({ firstItem: { x, y, item }, itemClick: !itemClick });
     }
     this.setState({ endArrayRandom });
   };
 
   //render các col trong row
   renderItemCols = (e, y) => {
+    const { status } = this.props;
     return e.map((item, x) => (
       <div
         key={x}
-        style={{
-          cursor: "pointer",
-          width: "7.14286%",
-          border: "4px solid black",
-          background: item.visible ? "#6598eb" : "#c9a061",
-        }}
+        className={status ? "ClassItem Item_" : "Item"}
         onClick={() => this.onChangeStatusItem(x, y, item)}
       >
         <div
@@ -965,21 +961,21 @@ class Test extends Component {
   renderItemRows = () => {
     const { endArrayRandom } = this.state;
     return endArrayRandom.map((e, y) => (
-      <div
-        style={{
-          height: "80px",
-          border: "2px",
-          display: "flex",
-        }}
-        key={y}
-      >
+      <div className="ItemRow" key={y}>
         {this.renderItemCols(e, y)}
       </div>
     ));
   };
 
   render() {
-    return <div style={{ width: "1000px" }}>{this.renderItemRows()}</div>;
+    const { endArrayRandom } = this.state;
+    return (
+      <div className="Content">
+        {endArrayRandom.map((item, y) => {
+          return <ItemTest key={y} item={item} />;
+        })}
+      </div>
+    );
   }
 }
 export default Test;

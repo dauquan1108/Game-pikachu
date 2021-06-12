@@ -20,8 +20,10 @@ class App extends Component {
   render() {
     const { status } = this.state;
 
-    const styleApp = status ? " App" : " App_";
-    const styleBtn = status ? "Button-Color" : "Button-Color_";
+    const styleApp = status ? "ClassApp App_" : "ClassApp App";
+    const styleBtn = status
+      ? "ClassButton-Color Button-Color_"
+      : "ClassButton-Color Button-Color";
     return (
       <div className={styleApp}>
         <div className="Button">
@@ -30,7 +32,7 @@ class App extends Component {
           </button>
         </div>
         <div className="Content">
-          {/* <Ingredient /> */} <Test />
+          <Test status={status} />
         </div>
       </div>
     );

@@ -4,18 +4,18 @@
     border: none;
 }
 
-.App {
-    background-color: #ffffff;
+.ClassApp {
     min-width: 100vh !important;
     min-Height: 100vh !important;
     /* ô */
 }
 
+.App {
+    background-color: #ffffff;
+}
+
 .App_ {
     background-color: #0d1117;
-    min-width: 100vh !important;
-    min-Height: 100vh !important;
-    /* ô */
 }
 
 .Button {
@@ -24,72 +24,25 @@
     padding-left: 5%;
 }
 
-.Button-Color {
+.ClassButton-Color {
     /* chau1 */
     width: 80px;
     height: 30px;
     background-color: #7cf20d85;
     border-radius: 6px;
-    color: #000;
     font-weight: bold;
 }
 
+.Button-Color {
+    color: #000;
+}
+
 .Button-Color_ {
-    /* chau1 */
-    width: 80px;
-    height: 30px;
-    background-color: #7cf20d85;
-    border-radius: 6px;
     color: azure;
-    font-weight: bold;
 }
 
 .Content {
     width: 50%;
     height: 50%;
     margin: 0 auto;
-}
-
-@media only screen and (min-width: 740px) and (max-width: 1023px) {
-    .App {
-        background-color: #ffffff;
-        min-width: 69vh !important;
-        min-Height: 100vh !important;
-        /* ô */
-    }
-    .App_ {
-        background-color: #f5c151;
-        min-width: 69vh !important;
-        min-Height: 100vh !important;
-        /* ô */
-    }
-    .Button {
-        /* con1 */
-        padding-top: 5%;
-        padding-left: 50px;
-    }
-    .Content {
-        /* con2 */
-        padding-top: 5%;
-        padding-left: 50px;
-    }
-}
-
-@media only screen and (max-width: 739px) {
-    .App {
-        background-color: #ffffff;
-        min-width: 50vh !important;
-        min-Height: 100vh !important;
-        /* ô */
-    }
-    .App_ {
-        background-color: #3df8ef;
-        min-width: 50vh !important;
-        min-Height: 100vh !important;
-        /* ô */
-    }
-    .Content {
-        padding-top: 5%;
-        padding-left: 4px;
-    }
 }
