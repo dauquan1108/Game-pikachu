@@ -626,7 +626,6 @@ class Test extends Component {
     super(props);
     const temp = this.initData([]);
     this.state = {
-      itemClick: false,
       firstItem: null,
       endArrayRandom: temp,
     };
@@ -646,7 +645,7 @@ class Test extends Component {
       return (
         this.checkLineY(x1, x2, y1) || this.checkLineY_Tr_Du(firstItem, endItem)
       );
-    if (this.checkRectX(firstItem, endItem)) return false;
+    if (this.checkRectX(firstItem, endItem)) return true;
     if (this.checkRectY(firstItem, endItem)) return true;
     return (
       this.checkMoreLineX(firstItem, endItem, -1) ||
@@ -655,6 +654,7 @@ class Test extends Component {
       this.checkMoreLineY(firstItem, endItem, 1)
     );
   };
+
   checkLineX = (y1, y2, x) => {
     let min = Math.min(y1, y2);
     let max = Math.max(y1, y2);
@@ -667,6 +667,7 @@ class Test extends Component {
     }
     return true;
   };
+
   checkLineX_Tr_Ph = (p1, p2) => {
     let min = Math.min(p1.y, p2.y);
     let max = Math.max(p1.y, p2.y);
@@ -717,6 +718,7 @@ class Test extends Component {
     }
     return true;
   };
+
   checkLineY_Tr_Du = (p1, p2) => {
     let min = Math.min(p1.x, p2.x);
     let max = Math.max(p1.x, p2.x);
@@ -773,6 +775,7 @@ class Test extends Component {
         this.checkLineY(pMinY.x, pMaxY.x, y) &&
         this.checkLineX(y, pMaxY.y, pMaxY.x)
       ) {
+        console.log("ok1");
         return true;
       }
     }
@@ -796,6 +799,7 @@ class Test extends Component {
         this.checkLineX(pMinX.y, pMaxX.y, x) &&
         this.checkLineY(x, pMaxX.x, pMaxX.y)
       ) {
+        console.log("ok2");
         return true;
       }
     }
@@ -835,6 +839,7 @@ class Test extends Component {
     }
     return false;
   }
+
   checkMoreLineY(p1, p2, type) {
     let pMinY = p1,
       pMaxY = p2;
@@ -928,18 +933,6 @@ class Test extends Component {
         endArrayRandom[y][x].visible = false;
         endArrayRandom[firstItem.y][firstItem.x].visible = false;
         this.setState({ firstItem: null });
-        // checkWinGame = (firstItem, endItem) => {
-        // const { endArrayRandom } = this.state;
-        // for (let y = 0; y < rows; y++) {
-        //   for (let x = 0; x < cols; x++) {
-        //     if (endArrayRandom[y][x].visible !== false) {
-        //       break;
-        //     } else {
-        //       console.log("ok");
-        //     }
-        //   }
-        // }
-        // };
       } else {
         this.setState({ firstItem: null });
       }
