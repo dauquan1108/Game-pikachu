@@ -1,7 +1,11 @@
 .Content {
     width: 70em;
+    /* background-image: url("../images/win.png");
+    background-repeat: no-repeat;
+    background-size: cover; */
     /* cha */
 }
+
 
 .ItemRow {
     height: 90px;
@@ -74,4 +78,10 @@
 
 .ItemImg_{
     display: unset;
+}
+.ClickItem{
+    opacity: 1;
+}
+.ClickItem_{
+    opacity: 0.5;
 }

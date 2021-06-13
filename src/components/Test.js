@@ -933,6 +933,7 @@ class Test extends Component {
         endArrayRandom[y][x].visible = false;
         endArrayRandom[firstItem.y][firstItem.x].visible = false;
         this.setState({ firstItem: null });
+        // this.CheckWinGame();
       } else {
         this.setState({ firstItem: null });
       }
@@ -940,6 +941,20 @@ class Test extends Component {
       this.setState({ firstItem: { x, y, item } });
     }
     this.setState({ endArrayRandom });
+  };
+
+  CheckWinGame = () => {
+    const { endArrayRandom } = this.state;
+    for (let y = 1; y < rows; y++) {
+      for (let x = 1; x < cols; x++) {
+        if (
+          endArrayRandom[1][rows - 1].visible === false &&
+          endArrayRandom[1][cols - 1].visible === false
+        ) {
+          alert("ok");
+        }
+      }
+    }
   };
 
   //render các col trong row
@@ -977,24 +992,26 @@ class Test extends Component {
     const { status } = this.props;
     return (
       <div className="Content">
-        {endArrayRandom.map((e, y) => {
-          return (
-            <div key={y} className="ItemRow">
-              {e.map((item, x) => {
-                return (
-                  <ItemTest
-                    key={x}
-                    item={item}
-                    y={y}
-                    x={x}
-                    status={status}
-                    onChangeStatusItem={this.onChangeStatusItem}
-                  />
-                );
-              })}
-            </div>
-          );
-        })}
+        <div className="ClassWin">
+          {endArrayRandom.map((e, y) => {
+            return (
+              <div key={y} className="ItemRow">
+                {e.map((item, x) => {
+                  return (
+                    <ItemTest
+                      key={x}
+                      item={item}
+                      y={y}
+                      x={x}
+                      status={status}
+                      onChangeStatusItem={this.onChangeStatusItem}
+                    />
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
       </div>
     );
   }
