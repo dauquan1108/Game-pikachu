@@ -1,31 +1,22 @@
 import React, { Component } from "react";
-import "./style.css";
-import { connect } from "react-redux";
+import "./Test.css";
 class ItemTest extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      visible: false,
-    };
-  }
-  ItemButtonOnClick = () => {};
+  ItemButtonOnClick = (x, y, item) => {
+    const { onChangeStatusItem } = this.props;
+    onChangeStatusItem(x, y, item);
+  };
 
   render() {
-    const { item } = this.props;
+    const { item, status, x, y } = this.props;
     return (
-      <div className="ItemTest">
-        <div
-        //   key={x}
-        //   className={status ? "ClassItem Item_" : "ClassItem Item"}
-        //   onClick={() => this.onChangeStatusItem(x, y, item)}
-        >
-          {/* <div
-            style={{
-              display: item.visible ? "unset" : "none",
-            }}
-          >
-            <img className="Img" src={item.img} alt="icon-pokemon" />
-          </div> */}
+      <div
+        className={
+          status ? "classItemTest ItemTest" : "classItemTest ItemTest_"
+        }
+        onClick={() => this.ItemButtonOnClick(x, y, item)}
+      >
+        <div className={item.visible ? "ItemImg_" : "ItemImg"}>
+          <img className="Img" src={item.img} alt="icon-pokemon" />
         </div>
       </div>
     );

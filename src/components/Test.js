@@ -43,590 +43,590 @@ const gameView = [
   { id: 17, img: a18, check: 0 },
 ];
 
-// const dataFake = [
-//   [
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//   ],
-//   [
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: 1,
-//       img: "a9",
-//       visible: true,
-//     },
-//     {
-//       id: 6,
-//       img: "a11",
-//       visible: true,
-//     },
-//     {
-//       id: 1,
-//       img: "a14",
-//       visible: true,
-//     },
-//     {
-//       id: 2,
-//       img: "a3",
-//       visible: true,
-//     },
-//     {
-//       id: 8,
-//       img: "a9",
-//       visible: true,
-//     },
-//     {
-//       id: 1,
-//       img: "a8",
-//       visible: true,
-//     },
-//     {
-//       id: 13,
-//       img: "a14",
-//       visible: true,
-//     },
-//     {
-//       id: 1,
-//       img: "a2",
-//       visible: true,
-//     },
-//     {
-//       id: 16,
-//       img: "a14",
-//       visible: true,
-//     },
-//     {
-//       id: 6,
-//       img: "a7",
-//       visible: true,
-//     },
-//     {
-//       id: 5,
-//       img: "a6",
-//       visible: false,
-//     },
-//     {
-//       id: 17,
-//       img: "a18",
-//       visible: false,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//   ],
-//   [
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: 1,
-//       img: "a2",
-//       visible: false,
-//     },
-//     {
-//       id: 1,
-//       img: "a4",
-//       visible: true,
-//     },
-//     {
-//       id: 1,
-//       img: "a3",
-//       visible: false,
-//     },
-//     {
-//       id: 6,
-//       img: "a7",
-//       visible: true,
-//     },
-//     {
-//       id: 7,
-//       img: "a8",
-//       visible: true,
-//     },
-//     {
-//       id: 8,
-//       img: "a9",
-//       visible: true,
-//     },
-//     {
-//       id: 16,
-//       img: "a17",
-//       visible: true,
-//     },
-//     {
-//       id: 12,
-//       img: "a13",
-//       visible: true,
-//     },
-//     {
-//       id: 9,
-//       img: "a18",
-//       visible: true,
-//     },
-//     {
-//       id: 4,
-//       img: "a5",
-//       visible: true,
-//     },
-//     {
-//       id: 1,
-//       img: "a2",
-//       visible: true,
-//     },
-//     {
-//       id: 7,
-//       img: "a7",
-//       visible: true,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//   ],
-//   [
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: 14,
-//       img: "a12",
-//       visible: true,
-//     },
-//     {
-//       id: 2,
-//       img: "a3",
-//       visible: true,
-//     },
-//     {
-//       id: 17,
-//       img: "a18",
-//       visible: true,
-//     },
-//     {
-//       id: 12,
-//       img: "a13",
-//       visible: true,
-//     },
-//     {
-//       id: 13,
-//       img: "a14",
-//       visible: true,
-//     },
-//     {
-//       id: 7,
-//       img: "a8",
-//       visible: true,
-//     },
-//     {
-//       id: 0,
-//       img: "a1",
-//       visible: true,
-//     },
-//     {
-//       id: 11,
-//       img: "a12",
-//       visible: true,
-//     },
-//     {
-//       id: 4,
-//       img: "a5",
-//       visible: true,
-//     },
-//     {
-//       id: 4,
-//       img: "a5",
-//       visible: false,
-//     },
-//     {
-//       id: 16,
-//       img: "a10",
-//       visible: true,
-//     },
-//     {
-//       id: 6,
-//       img: "a18",
-//       visible: true,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//   ],
-//   [
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: 4,
-//       img: "a5",
-//       visible: true,
-//     },
-//     {
-//       id: 16,
-//       img: "a17",
-//       visible: true,
-//     },
-//     {
-//       id: 6,
-//       img: "a7",
-//       visible: true,
-//     },
-//     {
-//       id: 1,
-//       img: "a2",
-//       visible: true,
-//     },
-//     {
-//       id: 5,
-//       img: "a6",
-//       visible: true,
-//     },
-//     {
-//       id: 8,
-//       img: "a9",
-//       visible: true,
-//     },
-//     {
-//       id: 15,
-//       img: "a16",
-//       visible: true,
-//     },
-//     {
-//       id: 14,
-//       img: "a15",
-//       visible: true,
-//     },
-//     {
-//       id: 0,
-//       img: "a1",
-//       visible: true,
-//     },
-//     {
-//       id: 4,
-//       img: "a4",
-//       visible: true,
-//     },
-//     {
-//       id: 16,
-//       img: "a17",
-//       visible: false,
-//     },
-//     {
-//       id: 3,
-//       img: "a4",
-//       visible: true,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//   ],
-//   [
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: 15,
-//       img: "a16",
-//       visible: true,
-//     },
-//     {
-//       id: 11,
-//       img: "a12",
-//       visible: true,
-//     },
-//     {
-//       id: 15,
-//       img: "a16",
-//       visible: true,
-//     },
-//     {
-//       id: 11,
-//       img: "a12",
-//       visible: true,
-//     },
-//     {
-//       id: 2,
-//       img: "a3",
-//       visible: true,
-//     },
-//     {
-//       id: 10,
-//       img: "a11",
-//       visible: true,
-//     },
-//     {
-//       id: 7,
-//       img: "a8",
-//       visible: true,
-//     },
-//     {
-//       id: 10,
-//       img: "a11",
-//       visible: true,
-//     },
-//     {
-//       id: 9,
-//       img: "a10",
-//       visible: true,
-//     },
-//     {
-//       id: 6,
-//       img: "a16",
-//       visible: true,
-//     },
-//     {
-//       id: 9,
-//       img: "a10",
-//       visible: true,
-//     },
-//     {
-//       id: 7,
-//       img: "a11",
-//       visible: true,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//   ],
-//   [
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: 14,
-//       img: "a15",
-//       visible: true,
-//     },
-//     {
-//       id: 5,
-//       img: "a6",
-//       visible: true,
-//     },
-//     {
-//       id: 0,
-//       img: "a1",
-//       visible: true,
-//     },
-//     {
-//       id: 0,
-//       img: "a1",
-//       visible: true,
-//     },
-//     {
-//       id: 5,
-//       img: "a6",
-//       visible: true,
-//     },
-//     {
-//       id: 12,
-//       img: "a13",
-//       visible: true,
-//     },
-//     {
-//       id: 9,
-//       img: "a10",
-//       visible: true,
-//     },
-//     {
-//       id: 12,
-//       img: "a13",
-//       visible: true,
-//     },
-//     {
-//       id: 16,
-//       img: "a17",
-//       visible: true,
-//     },
-//     {
-//       id: 3,
-//       img: "a4",
-//       visible: true,
-//     },
-//     {
-//       id: 14,
-//       img: "a15",
-//       visible: true,
-//     },
-//     {
-//       id: 14,
-//       img: "a15",
-//       visible: true,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//   ],
-//   [
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//     {
-//       id: -1,
-//       img: null,
-//       visible: false,
-//     },
-//   ],
-// ];
+const dataFake = [
+  [
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+  ],
+  [
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: 1,
+      img: a9,
+      visible: true,
+    },
+    {
+      id: 1,
+      img: a9,
+      visible: true,
+    },
+    {
+      id: 1,
+      img: "a14",
+      visible: false,
+    },
+    {
+      id: 2,
+      img: "a3",
+      visible: false,
+    },
+    {
+      id: 8,
+      img: "a9",
+      visible: false,
+    },
+    {
+      id: 1,
+      img: "a8",
+      visible: false,
+    },
+    {
+      id: 13,
+      img: "a14",
+      visible: false,
+    },
+    {
+      id: 1,
+      img: "a2",
+      visible: false,
+    },
+    {
+      id: 16,
+      img: "a14",
+      visible: false,
+    },
+    {
+      id: 6,
+      img: "a7",
+      visible: false,
+    },
+    {
+      id: 5,
+      img: "a6",
+      visible: false,
+    },
+    {
+      id: 17,
+      img: "a18",
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+  ],
+  [
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: 1,
+      img: "a2",
+      visible: false,
+    },
+    {
+      id: 1,
+      img: "a4",
+      visible: false,
+    },
+    {
+      id: 1,
+      img: "a3",
+      visible: false,
+    },
+    {
+      id: 6,
+      img: "a7",
+      visible: false,
+    },
+    {
+      id: 7,
+      img: "a8",
+      visible: false,
+    },
+    {
+      id: 8,
+      img: "a9",
+      visible: false,
+    },
+    {
+      id: 16,
+      img: "a17",
+      visible: false,
+    },
+    {
+      id: 12,
+      img: "a13",
+      visible: false,
+    },
+    {
+      id: 9,
+      img: "a18",
+      visible: false,
+    },
+    {
+      id: 4,
+      img: "a5",
+      visible: false,
+    },
+    {
+      id: 1,
+      img: "a2",
+      visible: false,
+    },
+    {
+      id: 7,
+      img: "a7",
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+  ],
+  [
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: 14,
+      img: "a12",
+      visible: false,
+    },
+    {
+      id: 2,
+      img: "a3",
+      visible: false,
+    },
+    {
+      id: 17,
+      img: "a18",
+      visible: false,
+    },
+    {
+      id: 12,
+      img: "a13",
+      visible: false,
+    },
+    {
+      id: 13,
+      img: "a14",
+      visible: false,
+    },
+    {
+      id: 7,
+      img: "a8",
+      visible: false,
+    },
+    {
+      id: 0,
+      img: "a1",
+      visible: false,
+    },
+    {
+      id: 11,
+      img: "a12",
+      visible: false,
+    },
+    {
+      id: 4,
+      img: "a5",
+      visible: false,
+    },
+    {
+      id: 4,
+      img: "a5",
+      visible: false,
+    },
+    {
+      id: 16,
+      img: "a10",
+      visible: false,
+    },
+    {
+      id: 6,
+      img: "a18",
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+  ],
+  [
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: 4,
+      img: "a5",
+      visible: false,
+    },
+    {
+      id: 16,
+      img: "a17",
+      visible: false,
+    },
+    {
+      id: 6,
+      img: "a7",
+      visible: false,
+    },
+    {
+      id: 1,
+      img: "a2",
+      visible: false,
+    },
+    {
+      id: 5,
+      img: "a6",
+      visible: false,
+    },
+    {
+      id: 8,
+      img: "a9",
+      visible: false,
+    },
+    {
+      id: 15,
+      img: "a16",
+      visible: false,
+    },
+    {
+      id: 14,
+      img: "a15",
+      visible: false,
+    },
+    {
+      id: 0,
+      img: "a1",
+      visible: false,
+    },
+    {
+      id: 4,
+      img: "a4",
+      visible: false,
+    },
+    {
+      id: 16,
+      img: "a17",
+      visible: false,
+    },
+    {
+      id: 3,
+      img: "a4",
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+  ],
+  [
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: 15,
+      img: "a16",
+      visible: false,
+    },
+    {
+      id: 11,
+      img: "a12",
+      visible: false,
+    },
+    {
+      id: 15,
+      img: "a16",
+      visible: false,
+    },
+    {
+      id: 11,
+      img: "a12",
+      visible: false,
+    },
+    {
+      id: 2,
+      img: "a3",
+      visible: false,
+    },
+    {
+      id: 10,
+      img: "a11",
+      visible: false,
+    },
+    {
+      id: 7,
+      img: "a8",
+      visible: false,
+    },
+    {
+      id: 10,
+      img: "a11",
+      visible: false,
+    },
+    {
+      id: 9,
+      img: "a10",
+      visible: false,
+    },
+    {
+      id: 6,
+      img: "a16",
+      visible: false,
+    },
+    {
+      id: 9,
+      img: "a10",
+      visible: false,
+    },
+    {
+      id: 7,
+      img: "a11",
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+  ],
+  [
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: 14,
+      img: "a15",
+      visible: false,
+    },
+    {
+      id: 5,
+      img: "a6",
+      visible: false,
+    },
+    {
+      id: 0,
+      img: "a1",
+      visible: false,
+    },
+    {
+      id: 0,
+      img: "a1",
+      visible: false,
+    },
+    {
+      id: 5,
+      img: "a6",
+      visible: false,
+    },
+    {
+      id: 12,
+      img: "a13",
+      visible: false,
+    },
+    {
+      id: 9,
+      img: "a10",
+      visible: false,
+    },
+    {
+      id: 12,
+      img: "a13",
+      visible: false,
+    },
+    {
+      id: 16,
+      img: "a17",
+      visible: false,
+    },
+    {
+      id: 3,
+      img: "a4",
+      visible: false,
+    },
+    {
+      id: 14,
+      img: "a15",
+      visible: false,
+    },
+    {
+      id: 14,
+      img: "a15",
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+  ],
+  [
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+    {
+      id: -1,
+      img: null,
+      visible: false,
+    },
+  ],
+];
 class Test extends Component {
   constructor(props) {
     super(props);
     const temp = this.initData([]);
     this.state = {
-      itemClick: true,
+      itemClick: false,
       firstItem: null,
       endArrayRandom: temp,
     };
@@ -646,7 +646,7 @@ class Test extends Component {
       return (
         this.checkLineY(x1, x2, y1) || this.checkLineY_Tr_Du(firstItem, endItem)
       );
-    if (this.checkRectX(firstItem, endItem)) return true;
+    if (this.checkRectX(firstItem, endItem)) return false;
     if (this.checkRectY(firstItem, endItem)) return true;
     return (
       this.checkMoreLineX(firstItem, endItem, -1) ||
@@ -921,58 +921,86 @@ class Test extends Component {
   };
 
   onChangeStatusItem = (x, y, item) => {
-    const { endArrayRandom, firstItem, itemClick } = this.state;
+    const { endArrayRandom, firstItem } = this.state;
     if (firstItem) {
       const endItem = { x, y, item };
       if (item.id === firstItem.item.id && this.checkAll(firstItem, endItem)) {
         endArrayRandom[y][x].visible = false;
         endArrayRandom[firstItem.y][firstItem.x].visible = false;
-        this.setState({ firstItem: null, itemClick: !itemClick });
+        this.setState({ firstItem: null });
+        // checkWinGame = (firstItem, endItem) => {
+        // const { endArrayRandom } = this.state;
+        // for (let y = 0; y < rows; y++) {
+        //   for (let x = 0; x < cols; x++) {
+        //     if (endArrayRandom[y][x].visible !== false) {
+        //       break;
+        //     } else {
+        //       console.log("ok");
+        //     }
+        //   }
+        // }
+        // };
       } else {
-        this.setState({ firstItem: null, itemClick: !itemClick });
+        this.setState({ firstItem: null });
       }
     } else {
-      this.setState({ firstItem: { x, y, item }, itemClick: !itemClick });
+      this.setState({ firstItem: { x, y, item } });
     }
     this.setState({ endArrayRandom });
   };
 
   //render các col trong row
-  renderItemCols = (e, y) => {
-    const { status } = this.props;
-    return e.map((item, x) => (
-      <div
-        key={x}
-        className={status ? "ClassItem Item_" : "Item"}
-        onClick={() => this.onChangeStatusItem(x, y, item)}
-      >
-        <div
-          style={{
-            display: item.visible ? "unset" : "none",
-          }}
-        >
-          <img className="Img" src={item.img} alt="icon-pokemon" />
-        </div>
-      </div>
-    ));
-  };
+  // renderItemCols = (e, y) => {
+  //   const { status } = this.props;
+  //   return e.map((item, x) => (
+  //     <div
+  //       key={x}
+  //       className={status ? "ClassItem Item_" : "Item"}
+  //       onClick={() => this.onChangeStatusItem(x, y, item)}
+  //     >
+  //       <div
+  //         style={{
+  //           display: item.visible ? "unset" : "none",
+  //         }}
+  //       >
+  //         <img className="Img" src={item.img} alt="icon-pokemon" />
+  //       </div>
+  //     </div>
+  //   ));
+  // };
 
-  //render cac rows trong view
-  renderItemRows = () => {
-    const { endArrayRandom } = this.state;
-    return endArrayRandom.map((e, y) => (
-      <div className="ItemRow" key={y}>
-        {this.renderItemCols(e, y)}
-      </div>
-    ));
-  };
+  // //render cac rows trong view
+  // renderItemRows = () => {
+  //   const { endArrayRandom } = this.state;
+  //   return endArrayRandom.map((e, y) => (
+  //     <div className="ItemRow" key={y}>
+  //       {this.renderItemCols(e, y)}
+  //     </div>
+  //   ));
+  // };
 
   render() {
     const { endArrayRandom } = this.state;
+    const { status } = this.props;
     return (
       <div className="Content">
-        {endArrayRandom.map((item, y) => {
-          return <ItemTest key={y} item={item} />;
+        {endArrayRandom.map((e, y) => {
+          return (
+            <div key={y} className="ItemRow">
+              {e.map((item, x) => {
+                return (
+                  <ItemTest
+                    key={x}
+                    item={item}
+                    y={y}
+                    x={x}
+                    status={status}
+                    onChangeStatusItem={this.onChangeStatusItem}
+                  />
+                );
+              })}
+            </div>
+          );
         })}
       </div>
     );
