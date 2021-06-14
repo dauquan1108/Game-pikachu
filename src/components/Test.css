@@ -6,12 +6,12 @@
     /* cha */
 }
 
-
 .ItemRow {
     height: 90px;
     display: flex;
     /* con */
 }
+
 
 /* .ClassItem {
     cursor: pointer;
@@ -31,6 +31,7 @@
     height: 100%;
     animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
 }
+
 
 /* .Img_ {
     width: 100%;
@@ -58,30 +59,36 @@
     }
 }
 
+
 /* Phan 2 */
-.classItemTest{
+
+.classItemTest {
     cursor: pointer;
     width: 100%;
+    overflow: hidden;
+    border-radius: 6px;
 }
 
-.ItemTest{
+.ItemTest {
     border: 3px solid #0d1117;
 }
 
-.ItemTest_{
+.ItemTest_ {
     border: 3px solid #ffffff;
 }
 
-.ItemImg{
+.ItemImg {
     display: none;
 }
 
-.ItemImg_{
+.ItemImg_ {
     display: unset;
 }
-.ClickItem{
+
+.ClickItem {
     opacity: 1;
 }
-.ClickItem_{
+
+.ClickItem_ {
     opacity: 0.5;
 }

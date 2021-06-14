@@ -945,16 +945,18 @@ class Test extends Component {
 
   CheckWinGame = () => {
     const { endArrayRandom } = this.state;
+    debugger;
     for (let y = 1; y < rows; y++) {
       for (let x = 1; x < cols; x++) {
         if (
-          endArrayRandom[1][rows - 1].visible === false &&
-          endArrayRandom[1][cols - 1].visible === false
+          endArrayRandom[y][rows - 1].visible === true &&
+          endArrayRandom[y][cols - 1].visible === true
         ) {
-          alert("ok");
+          break;
         }
       }
     }
+    alert("ok");
   };
 
   //render các col trong row
